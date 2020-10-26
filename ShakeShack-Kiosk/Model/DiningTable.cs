@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Threading;
 
 namespace ShakeShack_Kiosk.Model
@@ -14,7 +15,7 @@ namespace ShakeShack_Kiosk.Model
         public const int EXPIRE_SECOND = 5;
     }
 
-    class DiningTable
+    class DiningTable : INotifyPropertyChanged
     {
         public int Number { get; set; }
         private DateTime paidAt { get; set; }

@@ -75,6 +75,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converter\BoolToVisibilityConverter.cs" />
+    <Compile Include="ViewModel\TableViewModel.cs" />
+    <Compile Include="View\DiningAreaView.xaml.cs">
+      <DependentUpon>DiningAreaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\HomeView.xaml.cs">
+      <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OrderView.xaml.cs">
+      <DependentUpon>OrderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PaymentView.xaml.cs">
+      <DependentUpon>PaymentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TableView.xaml.cs">
+      <DependentUpon>TableView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -83,6 +100,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Config\DBConfig.cs" />
+    <Compile Include="Database\Dao\CategoryDao.cs" />
+    <Compile Include="Database\Dao\FoodDao.cs" />
     <Compile Include="Database\DBConnection.cs" />
     <Compile Include="Database\SQLMapper\CategorySQLMapper.cs" />
     <Compile Include="Database\SQLMapper\FoodSQLMapper.cs" />
@@ -90,12 +110,34 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\DiningAreaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\HomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OrderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PaymentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\DiningTable.cs" />
     <Compile Include="Model\Food.cs" />
     <Compile Include="Model\OrderFood.cs" />
+    <Compile Include="ViewModel\OrderFoodViewModel.cs" />
+    <Compile Include="ViewModel\OrderViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -123,9 +165,21 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Database\Dao\" />
-    <Folder Include="ViewModel\" />
-    <Folder Include="View\" />
+    <Resource Include="Assets\FoodImage\ChiknShack.jpg" />
+    <Resource Include="Assets\FoodImage\GochujagChickn.jpg" />
+    <Resource Include="Assets\FoodImage\GochujagShack.jpg" />
+    <Resource Include="Assets\FoodImage\Ham.jpg" />
+    <Resource Include="Assets\FoodImage\Shack.jpg" />
+    <Resource Include="Assets\FoodImage\ShackStack.jpg" />
+    <Resource Include="Assets\FoodImage\Shroom.jpg" />
+    <Resource Include="Assets\FoodImage\SmokeShack.jpg" />
+    <Resource Include="Assets\home-icon.png" />
+    <Resource Include="Assets\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\ad.mp4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
