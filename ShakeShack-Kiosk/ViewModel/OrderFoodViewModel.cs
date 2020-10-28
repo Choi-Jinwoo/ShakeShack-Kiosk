@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ShakeShack_Kiosk.ViewModel
 {
-    class OrderFoodViewModel
+    class OrderFoodViewModel : INotifyPropertyChanged
     {
         private static OrderFoodViewModel instance;
         private OrderFoodViewModel() { }

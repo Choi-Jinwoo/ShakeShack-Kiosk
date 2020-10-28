@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="ShakeShack_Kiosk.Controls.TitleControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ShakeShack_Kiosk.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="800">
+    <Grid>
+        <Image HorizontalAlignment="Left"
+               Margin="80,10,0,10"
+               Source="/Assets/logo.png"
+               Width="100"/>
+
+        <TextBlock x:Name="tbClock"
+                   HorizontalAlignment="Center"
+                   Foreground="#ffffff"/>
+
+        <Image x:Name="imgHome"
+               Source="/Assets/home-icon.png"
+               Width="20"
+               Margin="0,10,80,10"
+               MouseDown="imgHome_MouseDown"
+               HorizontalAlignment="Right"/>
+    </Grid>
+</UserControl>

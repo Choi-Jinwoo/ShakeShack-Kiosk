@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShakeShack_Kiosk.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,15 @@ namespace ShakeShack_Kiosk
         public MainWindow()
         {
             InitializeComponent();
+            titleControl.OnNavigateToHome += TitleControl_OnNavigateToHome; ;
+        }
+
+        private void TitleControl_OnNavigateToHome(object sender, EventArgs e)
+        {
+            while (frPage.CanGoBack)
+            {
+                frPage.GoBack();
+            }
         }
     }
 }

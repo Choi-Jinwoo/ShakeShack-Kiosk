@@ -30,6 +30,12 @@ namespace ShakeShack_Kiosk.Model
             }
         }
 
+        public OrderFood(Food food)
+        {
+            this.Food = food;
+            TotalPrice = Food.Price * Count;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged(string name)
@@ -38,12 +44,6 @@ namespace ShakeShack_Kiosk.Model
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
-        }
-
-        public OrderFood(Food food)
-        {
-            this.Food = food;
-            TotalPrice = Food.Price * Count;
         }
     }
 }

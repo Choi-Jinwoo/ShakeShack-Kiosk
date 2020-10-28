@@ -4,12 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ShakeShack_Kiosk"
+        xmlns:controls="clr-namespace:ShakeShack_Kiosk.Controls"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <StackPanel>
-            <Frame Source="/View/HomeView.xaml"
-                   NavigationUIVisibility="Hidden"></Frame>
+            <controls:TitleControl x:Name="titleControl"/>
+            <Frame x:Name="frPage"
+                   Source="/View/HomeView.xaml"
+                   NavigationUIVisibility="Hidden" />
         </StackPanel>
     </Grid>
 </Window>
