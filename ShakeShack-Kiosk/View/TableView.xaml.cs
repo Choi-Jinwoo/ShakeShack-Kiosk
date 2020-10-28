@@ -39,6 +39,12 @@ namespace ShakeShack_Kiosk.View
 
         private void btnPaymentView_Click(object sender, RoutedEventArgs e)
         {
+            if (tableViewModel.SelectedTable == null)
+            {
+                MessageBox.Show("테이블을 선택해주세요");
+                return;
+            }
+
             NavigationService.Navigate(new Uri("/View/PaymentView.xaml", UriKind.Relative));
         }
 
@@ -48,9 +54,13 @@ namespace ShakeShack_Kiosk.View
 
             DiningTable table = (DiningTable)lstTable.SelectedItem;
 
-            table.PaidAt = DateTime.Now;
+            if (table.IsUsing)
+            {
+                MessageBox.Show("사용중인 테이블입니다");
+                return;
+            }
 
-            lstTable.SelectedIndex = -1;
+            tableViewModel.SelectedTable = table;
         }
     }
 }

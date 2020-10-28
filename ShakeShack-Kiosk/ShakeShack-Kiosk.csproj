@@ -82,6 +82,7 @@
       <DependentUpon>TitleControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converter\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converter\TableUsingBackgroundConverter.cs" />
     <Compile Include="ViewModel\TableViewModel.cs" />
     <Compile Include="View\DiningAreaView.xaml.cs">
       <DependentUpon>DiningAreaView.xaml</DependentUpon>

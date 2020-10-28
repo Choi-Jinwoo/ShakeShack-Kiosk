@@ -11,12 +11,15 @@
 
     <Page.Resources>
         <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <converter:TableUsingBackgroundConverter x:Key="TableUsingBackgroundConverter" />
     </Page.Resources>
 
     <Grid>
         <StackPanel>
             <ListBox x:Name="lstTable"
-                     SelectionChanged="lstTable_SelectionChanged">
+                     SelectionChanged="lstTable_SelectionChanged"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="3" Rows="3" />
@@ -24,7 +27,11 @@
                 </ListBox.ItemsPanel>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel>
+                        <StackPanel Background="{Binding IsUsing, Converter={StaticResource TableUsingBackgroundConverter}}"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Width="150"
+                                    Height="150">
                             <Label Content="{Binding Number}" />
                             <Label Visibility="{Binding IsUsing, Converter={StaticResource BoolToVisibilityConverter}}"
                                    Content="{Binding RemainSeconds}" />
@@ -36,12 +43,19 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate> 
             </ListBox>
-            <Button x:Name="btnPrePage"
-                    Content="이전"
-                    Click="btnPrePage_Click"/>
-            <Button x:Name="btnPaymentView"
-                    Content="다음"
-                    Click="btnPaymentView_Click" />
+
+            <Grid Width="300">
+                <Button x:Name="btnPrePage"
+                        Content="이전"
+                        Width="100"
+                        HorizontalAlignment="Left"
+                        Click="btnPrePage_Click"/>
+                <Button x:Name="btnPaymentView"
+                        Content="다음"
+                        Width="100"
+                        HorizontalAlignment="Right"
+                        Click="btnPaymentView_Click" />
+            </Grid>
         </StackPanel>
     </Grid>
 </Page>

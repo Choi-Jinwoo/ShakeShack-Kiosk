@@ -9,7 +9,7 @@ namespace ShakeShack_Kiosk.ViewModel
 {
     class TableViewModel
     {
-                private static TableViewModel instance;
+        private static TableViewModel instance;
         private TableViewModel() { }
 
         public static TableViewModel Instance 
@@ -23,6 +23,8 @@ namespace ShakeShack_Kiosk.ViewModel
                 return instance;
             }
         }
+
+        public DiningTable SelectedTable;
 
         public List<DiningTable> tables = new List<DiningTable>( new DiningTable[]
         {
