@@ -76,7 +76,7 @@
                     <Button x:Name="btntCardPayment"
                             Content="카드"
                             Width="100"
-                            HorizontalAlignment="Right"/>
+                            HorizontalAlignment="Right" Click="btntCardPayment_Click" Height="42" Margin="0,0,0,-0.4" VerticalAlignment="Top"/>
                 </Grid>
             </Grid>
             <Button x:Name="btnPrePage"

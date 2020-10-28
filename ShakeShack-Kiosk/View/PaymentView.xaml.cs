@@ -36,5 +36,10 @@ namespace ShakeShack_Kiosk.View
                 NavigationService.GoBack();
             }
         }
+
+        private void btntCardPayment_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("View/ScanQRcode.xaml", UriKind.Relative));
+        }
     }
 }

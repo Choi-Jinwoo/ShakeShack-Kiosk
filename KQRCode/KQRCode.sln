@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.30413.136
+VisualStudioVersion = 16.0.30517.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShakeShack-Kiosk", "ShakeShack-Kiosk\ShakeShack-Kiosk.csproj", "{055AEAC1-6476-4F39-ADEA-0C1CE5D67C42}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KQRCode", "KQRCode\KQRCode.csproj", "{62F1B37E-4BB2-442B-99A7-36279C5C0F3F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KQRCode", "KQRCode.csproj", "{62F1B37E-4BB2-442B-99A7-36279C5C0F3F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{055AEAC1-6476-4F39-ADEA-0C1CE5D67C42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{055AEAC1-6476-4F39-ADEA-0C1CE5D67C42}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{055AEAC1-6476-4F39-ADEA-0C1CE5D67C42}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{055AEAC1-6476-4F39-ADEA-0C1CE5D67C42}.Release|Any CPU.Build.0 = Release|Any CPU
 		{62F1B37E-4BB2-442B-99A7-36279C5C0F3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{62F1B37E-4BB2-442B-99A7-36279C5C0F3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62F1B37E-4BB2-442B-99A7-36279C5C0F3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -26,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {86F07900-5AFD-42FA-8F5D-F1E6F33CBC50}
+		SolutionGuid = {557A2906-6168-4003-AEF3-0CE1B3714195}
 	EndGlobalSection
 EndGlobal

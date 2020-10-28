@@ -1,0 +1,24 @@
+﻿<Page x:Class="ShakeShack_Kiosk.View.ScanQRcode"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:local="clr-namespace:ShakeShack_Kiosk.View"
+      xmlns:qrcode="clr-namespace:KQRCode;assembly=KQRCode"
+      mc:Ignorable="d"
+      Title="ScanQRcode" Height="450" Width="800">
+
+    <Grid>
+        <qrcode:KQRWebCam x:Name="webcam" Margin="12" 
+                          QrDecoded="webcam_QrDecoded" />
+        <TextBox x:Name="tbRecog" 
+                 Margin="12,12,12,12" 
+                 Text="인식된 값이 여기에 나온단다" 
+                 Height="30" 
+                 VerticalAlignment="Bottom" 
+                 HorizontalContentAlignment="Stretch" 
+                 VerticalContentAlignment="Center" 
+                 ></TextBox>
+
+    </Grid>
+</Page>
