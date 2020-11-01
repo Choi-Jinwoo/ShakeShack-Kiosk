@@ -18,18 +18,17 @@ namespace ShakeShack_Kiosk.View
     /// <summary>
     /// ScanQRcode.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class ScanQRcode : Page
+    public partial class ScanQRCodeView : Page
     {
-        public ScanQRcode()
+        public ScanQRCodeView()
         {
             InitializeComponent();
             webcam.CameraIndex = 0;
         }
 
         private void webcam_QrDecoded(object sender, string e) {
+            // TODO: 결제 완료
             tbRecog.Text = e; 
         }
-
-        
     }
 }

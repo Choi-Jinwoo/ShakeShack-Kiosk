@@ -96,8 +96,8 @@
     <Compile Include="View\PaymentView.xaml.cs">
       <DependentUpon>PaymentView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ScanQRcode.xaml.cs">
-      <DependentUpon>ScanQRcode.xaml</DependentUpon>
+    <Compile Include="View\ScanQRCodeView.xaml.cs">
+      <DependentUpon>ScanQRCodeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TableView.xaml.cs">
       <DependentUpon>TableView.xaml</DependentUpon>
@@ -139,7 +139,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ScanQRcode.xaml">
+    <Page Include="View\ScanQRCodeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
