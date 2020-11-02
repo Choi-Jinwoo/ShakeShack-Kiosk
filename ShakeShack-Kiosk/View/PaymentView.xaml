@@ -72,11 +72,13 @@
                     <Button x:Name="btnCashPayment"
                             Content="현금"
                             Width="100"
-                            HorizontalAlignment="Left"/>
+                            HorizontalAlignment="Left"
+                            Click="btnCashPayment_Click"/>
                     <Button x:Name="btntCardPayment"
                             Content="카드"
                             Width="100"
-                            HorizontalAlignment="Right" Click="btntCardPayment_Click" Height="42" Margin="0,0,0,-0.4" VerticalAlignment="Top"/>
+                            HorizontalAlignment="Right"
+                            Click="btntCardPayment_Click" />
                 </Grid>
             </Grid>
             <Button x:Name="btnPrePage"

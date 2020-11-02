@@ -39,7 +39,12 @@ namespace ShakeShack_Kiosk.View
 
         private void btntCardPayment_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("View/ScanQRCodeView.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("View/CardPaymentView.xaml", UriKind.Relative));
+        }
+
+        private void btnCashPayment_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("View/CashPaymentView.xaml", UriKind.Relative));
         }
     }
 }

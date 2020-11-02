@@ -18,9 +18,9 @@ namespace ShakeShack_Kiosk.View
     /// <summary>
     /// ScanQRcode.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class ScanQRCodeView : Page
+    public partial class CardPaymentView : Page
     {
-        public ScanQRCodeView()
+        public CardPaymentView()
         {
             InitializeComponent();
             webcam.CameraIndex = 0;
