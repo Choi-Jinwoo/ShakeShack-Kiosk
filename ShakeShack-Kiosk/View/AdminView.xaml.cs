@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace ShakeShack_Kiosk.View
 {
@@ -23,6 +24,22 @@ namespace ShakeShack_Kiosk.View
         public AdminView()
         {
             InitializeComponent();
+            DispatcherTimer Timer = new DispatcherTimer();
+            Timer.Interval = TimeSpan.FromSeconds(1);
+            Timer.Tick += runTime;
+
+            Timer.Start();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/View/OrderView.xaml", UriKind.Relative));
+        }
+
+        private void runTime(object sender, EventArgs e)
+        {
+            String time = App.time;
+            runtime.Text = time.ToString();
         }
     }
 }
