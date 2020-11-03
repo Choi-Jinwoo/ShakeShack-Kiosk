@@ -37,5 +37,10 @@ namespace ShakeShack_Kiosk.View
             mdAdPlayer.Position = TimeSpan.FromSeconds(0);
             mdAdPlayer.Play();
         }
+
+        private void btnAdmin_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/View/AdminView.xaml", UriKind.Relative));
+        }
     }
 }

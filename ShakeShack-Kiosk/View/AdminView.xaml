@@ -10,55 +10,49 @@
 
     <Grid Background="#ffffff">
         <Grid Margin="0,25,705,25">
-            <TextBlock 
-            HorizontalAlignment="Left" 
-            TextWrapping="Wrap" 
-            FontSize="14 px"
-            FontWeight="Bold"
-            Text="총 매출" 
-            VerticalAlignment="Top" Margin="10,10,0,0"/>
+            <Button
+                Content="총 매출"
+                Height="30px" 
+                Margin="0,0,0,370"
+                Click="Button_Click">
+            </Button>
 
-            <TextBlock 
-            HorizontalAlignment="Left" 
-            TextWrapping="Wrap" 
-            FontSize="14 px"
-            Text="카드매출액" 
-            VerticalAlignment="Top" Margin="10,30,0,0"/>
+            <Button
+                Content="카드매출액"
+                Height="30px" 
+                Margin="0,0,0,300">
+            </Button>
 
-            <TextBlock 
-            HorizontalAlignment="Left" 
-            TextWrapping="Wrap" 
-            FontSize="14 px"
-            Text="현금매출액" 
-            VerticalAlignment="Top" Margin="10,50,0,0"/>
+            <Button
+                Content="현금매출액"
+                Height="30px" 
+                Margin="0,0,0,230">
+            </Button>
 
-            <TextBlock 
-            HorizontalAlignment="Left" 
-            TextWrapping="Wrap" 
-            FontSize="14 px"
-            Text="메뉴별" 
-            VerticalAlignment="Top" Margin="10,70,0,0"/>
+            <Button
+                Content="메뉴별"
+                Height="30px" 
+                Margin="0,0,0,160">
+            </Button>
 
-            <TextBlock 
-            HorizontalAlignment="Left" 
-            TextWrapping="Wrap" 
-            FontSize="14 px"
-            Text="카테고리별" 
-            VerticalAlignment="Top" Margin="10,90,0,0"/>
+            <Button
+                Content="카테고리별"
+                Height="30px" 
+                Margin="0,0,0,90">
+            </Button>
 
-            <TextBlock 
-            HorizontalAlignment="Left" 
-            TextWrapping="Wrap" 
-            FontSize="14 px"
-            Text="하루별" 
-            VerticalAlignment="Top" Margin="10,110,0,0"/>
+            <Button
+                Content="하루별"
+                Height="30px" 
+                Margin="0,0,0,20">
+            </Button>
 
-            <TextBlock 
-            HorizontalAlignment="Left" 
-            TextWrapping="Wrap" 
-            FontSize="14 px"
-            Text="시간별" 
-            VerticalAlignment="Top" Margin="10,130,0,0"/>
+            <Button
+                Content="시간별"
+                Height="30px" 
+                Margin="0,0,0,-50">
+            </Button>
+
         </Grid>
 
         <Border
@@ -78,7 +72,8 @@
             TextWrapping="Wrap" 
             FontSize="20 px"
             FontWeight="Bold"
-            Text="00 : 00 : 16" 
+            Text="" 
+            x:Name="runtime"
             VerticalAlignment="Center"/>
         </Border>
         
