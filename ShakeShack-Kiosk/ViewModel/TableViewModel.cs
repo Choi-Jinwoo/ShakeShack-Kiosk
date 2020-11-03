@@ -38,5 +38,10 @@ namespace ShakeShack_Kiosk.ViewModel
             new DiningTable() {Number=8},
             new DiningTable() {Number=9},
         });
+
+        public void InitInstance()
+        {
+            this.SelectedTable = null;
+        }
     }
 }

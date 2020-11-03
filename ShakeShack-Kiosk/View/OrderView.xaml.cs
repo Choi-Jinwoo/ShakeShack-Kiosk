@@ -126,5 +126,10 @@ namespace ShakeShack_Kiosk.View
         {
             NavigationService.Navigate(new Uri("/View/DiningAreaView.xaml", UriKind.Relative));
         }
+
+        private void btnCancelOrder_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

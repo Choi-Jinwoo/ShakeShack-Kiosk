@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShakeShack_Kiosk.Model
+namespace ShakeShack_Kiosk.Enum
 {
-    class User
+    enum PaymentMethodEnum
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
+        CARD,
+        CASH
     }
 }

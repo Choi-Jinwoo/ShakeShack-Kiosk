@@ -34,6 +34,8 @@ namespace ShakeShack_Kiosk.View
             if (e.Key == Key.Enter)
             {
                 string barcodeId = txtScanBarcode.Text;
+
+                
             }
         }
     }

@@ -26,7 +26,7 @@ namespace ShakeShack_Kiosk.ViewModel
             }
         }
 
-        public ObservableCollection<OrderFood> OrderFoods { get; } = new ObservableCollection<OrderFood>();
+        public ObservableCollection<OrderFood> OrderFoods { get; private set; } = new ObservableCollection<OrderFood>();
 
         private int orderFoodTotalPrice { get; set; } = 0;
         public int OrderFoodTotalPrice
@@ -114,6 +114,12 @@ namespace ShakeShack_Kiosk.ViewModel
         {
             OrderFoods.Clear();
             OrderFoodTotalPrice = CalcOrderFoodTotalPrice();
+        }
+
+        public void InitInstance()
+        {
+            this.OrderFoods = new ObservableCollection<OrderFood>();
+            this.OrderFoodTotalPrice = 0;
         }
     }
 }

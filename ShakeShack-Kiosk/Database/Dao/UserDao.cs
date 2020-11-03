@@ -11,11 +11,11 @@ namespace ShakeShack_Kiosk.Database.Dao
 {
     class UserDao
     {
-        public User GetUserByBarcodeId(string barcodeId)
+        public User GetUser(string id)
         {
             DBConnection connection = new DBConnection();
             connection.Connect();
-            connection.SetCommand(UserSQLMapper.FindUserByBarcodeSQL(barcodeId));
+            connection.SetCommand(UserSQLMapper.FindUserSQL(id));
 
             MySqlDataReader reader = connection.ExecuteQuery();
             
@@ -27,35 +27,7 @@ namespace ShakeShack_Kiosk.Database.Dao
 
             User user = new User()
             {
-                Id = Convert.ToInt32(reader["id"]),
-                BarcodeId = (string)reader["barcode_id"],
-                QRCodeID = (string)reader["qrcode_id"],
-                Name = (string)reader["name"],
-            };
-
-            connection.CloseConnection();
-            return user;
-        }
-
-        public User GetUserByQRCodeId(string qrcodeId)
-        {
-            DBConnection connection = new DBConnection();
-            connection.Connect();
-            connection.SetCommand(UserSQLMapper.FindUserByQRCodeSQL(qrcodeId));
-
-            MySqlDataReader reader = connection.ExecuteQuery();
-            
-            if (reader.Read() == false)
-            {
-                connection.CloseConnection();
-                return null;
-            }
-
-            User user = new User()
-            {
-                Id = Convert.ToInt32(reader["id"]),
-                BarcodeId = (string)reader["barcode_id"],
-                QRCodeID = (string)reader["qrcode_id"],
+                Id = (string)reader["id"],
                 Name = (string)reader["name"],
             };
 

@@ -89,6 +89,11 @@
     </Compile>
     <Compile Include="Converter\BoolToVisibilityConverter.cs" />
     <Compile Include="Converter\TableUsingBackgroundConverter.cs" />
+    <Compile Include="Database\Dao\UserDao.cs" />
+    <Compile Include="Database\SQLMapper\UserSQLMapper.cs" />
+    <Compile Include="Enum\PaymentMethodEnum.cs" />
+    <Compile Include="Model\OrderHistory.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="ViewModel\PaymentViewModel.cs" />
     <Compile Include="ViewModel\TableViewModel.cs" />
     <Compile Include="View\CashPaymentView.xaml.cs">
