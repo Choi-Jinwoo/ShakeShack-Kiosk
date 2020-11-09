@@ -62,7 +62,8 @@
                                     BorderBrush="Transparent"
                                     Background="#61b146"
                                     Foreground="#ffffff"
-                                    HorizontalAlignment="Right"/>
+                                    HorizontalAlignment="Right"
+                                    Click="btnAdmin_Click"/>
                         </Grid>
                     </StackPanel>
                 </Grid>

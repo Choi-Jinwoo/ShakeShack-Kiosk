@@ -12,35 +12,34 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace ShakeShack_Kiosk.View
 {
     /// <summary>
-    /// HomeView.xaml에 대한 상호 작용 논리
+    /// AdminView.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class HomeView : Page
+    public partial class AdminView : Page
     {
-        public HomeView()
+        public AdminView()
         {
             InitializeComponent();
-            mdAdPlayer.Play();
+            DispatcherTimer Timer = new DispatcherTimer();
+            Timer.Interval = TimeSpan.FromSeconds(1);
+            Timer.Tick += runTime;
+
+            Timer.Start();
         }
 
-        private void btnOrder_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/View/OrderView.xaml", UriKind.Relative));
         }
 
-        private void myMedia_MediaEnded(object sender, RoutedEventArgs e)
+        private void runTime(object sender, EventArgs e)
         {
-            mdAdPlayer.Stop();
-            mdAdPlayer.Position = TimeSpan.FromSeconds(0);
-            mdAdPlayer.Play();
-        }
-
-        private void btnAdmin_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/View/AdminView.xaml", UriKind.Relative));
+            String time = App.time;
+            runtime.Text = time.ToString();
         }
     }
 }
