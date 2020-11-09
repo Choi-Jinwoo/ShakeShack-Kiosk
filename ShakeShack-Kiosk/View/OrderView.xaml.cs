@@ -133,7 +133,7 @@ namespace ShakeShack_Kiosk.View
         {
             orderFoodViewModel.InitInstance();
             tableViewModel.InitInstance();
-            NavigationService.Navigate(new Uri("/View/HOmeView.xaml"));
+            NavigationService.Navigate(new Uri("/View/HomeView.xaml", UriKind.Relative));
         }
     }
 }

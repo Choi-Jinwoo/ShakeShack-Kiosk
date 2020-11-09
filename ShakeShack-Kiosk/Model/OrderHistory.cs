@@ -9,7 +9,7 @@ namespace ShakeShack_Kiosk.Model
 {
     class OrderHistory
     {
-        public int id { get; set;  }
+        public int order_id { get; set;  }
         public string UserId { get; set; }
         public int FoodId { get; set; }
         public int? TableNumber { get; set; }

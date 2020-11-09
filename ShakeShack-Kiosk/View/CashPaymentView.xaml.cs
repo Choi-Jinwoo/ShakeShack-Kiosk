@@ -27,9 +27,13 @@ namespace ShakeShack_Kiosk.View
         public CashPaymentView()
         {
             InitializeComponent();
-            tbUserName.DataContext = paymentViewModel.OrderUser;
-            tbUserId.DataContext = paymentViewModel.OrderUser;
-            // TODO: 바인딩 안됨
+            this.DataContext = paymentViewModel;
+            Loaded += CashPaymentView_Loaded;
+        }
+
+        private void CashPaymentView_Loaded(object sender, RoutedEventArgs e)
+        {
+            txtScanBarcode.Focus();
         }
 
         private void txtScanBarcode_KeyUp(object sender, KeyEventArgs e)
@@ -38,7 +42,7 @@ namespace ShakeShack_Kiosk.View
             {
                 string barcodeId = txtScanBarcode.Text;
 
-                paymentViewModel.PayByCash(barcodeId);
+                paymentViewModel.SetPayUser(barcodeId);
 
                 if (paymentViewModel.OrderUser == null)
                 {
@@ -48,8 +52,22 @@ namespace ShakeShack_Kiosk.View
                 {
                     tbBarcodeDecodedStatus.Text = "";
                 }
+
                 txtScanBarcode.Text = "";
             }
+        }
+
+        private void btnResultPaymentPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (paymentViewModel.OrderUser == null)
+            {
+                MessageBox.Show("바코드를 인식해주세요");
+                txtScanBarcode.Focus();
+                return;
+            }
+
+            paymentViewModel.PayByCash();
+            NavigationService.Navigate(new Uri("/View/ResultPaymentView.xaml", UriKind.Relative));
         }
     }
 }

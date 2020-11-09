@@ -17,8 +17,8 @@
         <TextBlock x:Name="tbOrderFoodTotalPrice"
                    Text="{Binding OrderFoodTotalPrice, StringFormat={}총 가격: {0}원}" />
 
-        <TextBlock x:Name="tbUserName"  Text="{Binding Name}"/>
-        <TextBlock x:Name="tbUserId" Text="{Binding Id}"/>
+        <TextBlock x:Name="tbUserName"  Text="{Binding OrderUser.Name}"/>
+        <TextBlock x:Name="tbUserId" Text="{Binding OrderUser.Id}"/>
 
         <TextBlock x:Name="tbBarcodeDecodedStatus"
                    HorizontalAlignment="Center"
@@ -28,7 +28,8 @@
             <Button x:Name="btnPrePage"
                     Content="이전" />
             <Button x:Name="btnResultPaymentPage"
-                    Content="다음" />
+                    Content="다음"
+                    Click="btnResultPaymentPage_Click"/>
         </Grid>
     </StackPanel>
 </Page>
