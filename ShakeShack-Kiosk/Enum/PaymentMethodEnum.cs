@@ -8,7 +8,7 @@ namespace ShakeShack_Kiosk.Enum
 {
     enum PaymentMethodEnum
     {
-        CARD,
-        CASH
+        CARD = 0,
+        CASH = 1
     }
 }

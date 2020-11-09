@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -12,10 +13,25 @@ namespace ShakeShack_Kiosk.ViewModel
 {
     class PaymentViewModel
     {
+        private static PaymentViewModel instance;
+        private PaymentViewModel() { }
+
+        public static PaymentViewModel Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new PaymentViewModel();
+                }
+                return instance;
+            }
+        }
+
         private UserDao userDao = new UserDao();
+        private OrderHistoryDao orderHistoryDao = new OrderHistoryDao();
         private OrderFoodViewModel orderFoodViewModel = OrderFoodViewModel.Instance;
         private TableViewModel tableViewModel= TableViewModel.Instance;
-
 
         public User OrderUser;
 
@@ -36,8 +52,8 @@ namespace ShakeShack_Kiosk.ViewModel
             User user = userDao.GetUser(userId);
             if (user == null)
             {
-                MessageBox.Show("존재하지 않는 회원입니다");
-                return;
+                OrderUser = null;
+                return;    
             }
 
             OrderUser = user;
@@ -50,15 +66,20 @@ namespace ShakeShack_Kiosk.ViewModel
                     FoodId = orderFood.Food.Id,
                     Count = orderFood.Count,
                     TableNumber = tableViewModel.SelectedTable?.Number,
-                    PaymentMethod = paymentMethod
+                    PaymentMethod = (int) paymentMethod
                 };
-            }
 
-            // TODO: orderHistory 저장
+                orderHistoryDao.CreateOrderHistory(orderHistory);
+            }           
 
             // 결제 완료 후 인스턴스 초기화
             orderFoodViewModel.InitInstance();
             tableViewModel.InitInstance();
+        }
+
+        public void InitInstance()
+        {
+            this.OrderUser = null;
         }
     }
 }

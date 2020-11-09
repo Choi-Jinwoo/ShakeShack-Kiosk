@@ -28,6 +28,8 @@ namespace ShakeShack_Kiosk.View
     {
         private OrderViewModel orderViewModel = new OrderViewModel();
         private OrderFoodViewModel orderFoodViewModel = OrderFoodViewModel.Instance;
+        private TableViewModel tableViewModel = TableViewModel.Instance;
+
 
         public OrderView()
         {
@@ -129,7 +131,9 @@ namespace ShakeShack_Kiosk.View
 
         private void btnCancelOrder_Click(object sender, RoutedEventArgs e)
         {
-
+            orderFoodViewModel.InitInstance();
+            tableViewModel.InitInstance();
+            NavigationService.Navigate(new Uri("/View/HOmeView.xaml"));
         }
     }
 }

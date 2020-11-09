@@ -9,15 +9,18 @@
       Title="ScanQRCodeView" Height="450" Width="800">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        
         <qrcode:KQRWebCam x:Name="webcam"
+                          Grid.Row="0"
                           Margin="12"
                           QrDecoded="webcam_QrDecoded" />
-        <TextBox x:Name="tbRecog"
-                 Margin="12,12,12,12"
-                 Text="인식된 값이 여기에 나온단다"
-                 Height="30"
-                 VerticalAlignment="Bottom"
-                 HorizontalContentAlignment="Stretch"
-                 VerticalContentAlignment="Center" />
+        <TextBlock x:Name="tbQRDecodedStatus"
+                   Grid.Row="1"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
     </Grid>
 </Page>

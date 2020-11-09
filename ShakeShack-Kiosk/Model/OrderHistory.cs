@@ -14,7 +14,7 @@ namespace ShakeShack_Kiosk.Model
         public int FoodId { get; set; }
         public int? TableNumber { get; set; }
         public int Count { get; set; }
-        public PaymentMethodEnum PaymentMethod { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public int PaymentMethod { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
     }
 }

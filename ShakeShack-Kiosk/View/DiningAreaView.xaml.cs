@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShakeShack_Kiosk.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,8 @@ namespace ShakeShack_Kiosk.View
     /// </summary>
     public partial class DiningAreaView : Page
     {
+        TableViewModel tableViewModel = TableViewModel.Instance;
+
         public DiningAreaView()
         {
             InitializeComponent();
@@ -35,7 +38,8 @@ namespace ShakeShack_Kiosk.View
 
         private void btnToGo_Click(object sender, RoutedEventArgs e)
         {
-
+            tableViewModel.InitInstance();
+            NavigationService.Navigate(new Uri("View/PaymentView.xaml", UriKind.Relative));
         }
 
         private void btnForHere_Click(object sender, RoutedEventArgs e)

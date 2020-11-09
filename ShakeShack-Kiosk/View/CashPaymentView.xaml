@@ -17,8 +17,12 @@
         <TextBlock x:Name="tbOrderFoodTotalPrice"
                    Text="{Binding OrderFoodTotalPrice, StringFormat={}총 가격: {0}원}" />
 
-        <TextBlock Text="123455"/>
-        <TextBlock Text="홍길동"/>
+        <TextBlock x:Name="tbUserName"  Text="{Binding Name}"/>
+        <TextBlock x:Name="tbUserId" Text="{Binding Id}"/>
+
+        <TextBlock x:Name="tbBarcodeDecodedStatus"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
 
         <Grid>
             <Button x:Name="btnPrePage"

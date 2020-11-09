@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShakeShack_Kiosk.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,9 @@ namespace ShakeShack_Kiosk.Controls
     /// </summary>
     public partial class TitleControl : UserControl
     {
+        private OrderFoodViewModel orderFoodViewModel = OrderFoodViewModel.Instance;
+        private TableViewModel tableViewModel = TableViewModel.Instance;
+
         public event EventHandler OnNavigateToHome;
 
 
@@ -49,6 +53,9 @@ namespace ShakeShack_Kiosk.Controls
         {
             if (MessageBox.Show( "주문 내용이 취소됩니다", "ShakeShack", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
+                orderFoodViewModel.InitInstance();
+                tableViewModel.InitInstance();
+
                 if (OnNavigateToHome != null)
                 {
                     OnNavigateToHome(this, null);

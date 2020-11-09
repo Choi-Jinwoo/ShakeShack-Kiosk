@@ -293,7 +293,8 @@
                             HorizontalAlignment="Right"
                             Margin="0,50,0,0"
                             Grid.Row="1">
-                    <Button Content="주문 취소"
+                    <Button x:Name="btnCancelOrder"
+                            Content="주문 취소"
                             Background="#61b146"
                             Foreground="#ffffff"
                             BorderBrush="Transparent"
@@ -301,7 +302,8 @@
                             FontWeight="Bold"
                             Width="80"
                             Height="30"
-                            Margin="0,0,10,0"/>
+                            Margin="0,0,10,0"
+                            Click="btnCancelOrder_Click"/>
                     <Button x:Name="btnOrder"
                             Content="주문 하기"
                             Background="#61b146"

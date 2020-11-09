@@ -89,7 +89,9 @@
     </Compile>
     <Compile Include="Converter\BoolToVisibilityConverter.cs" />
     <Compile Include="Converter\TableUsingBackgroundConverter.cs" />
+    <Compile Include="Database\Dao\OrderHistoryDao.cs" />
     <Compile Include="Database\Dao\UserDao.cs" />
+    <Compile Include="Database\SQLMapper\OrderHistorySQLMapper.cs" />
     <Compile Include="Database\SQLMapper\UserSQLMapper.cs" />
     <Compile Include="Enum\PaymentMethodEnum.cs" />
     <Compile Include="Model\OrderHistory.cs" />

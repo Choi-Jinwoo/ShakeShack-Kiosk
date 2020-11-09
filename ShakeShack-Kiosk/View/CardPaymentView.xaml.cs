@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShakeShack_Kiosk.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,7 @@ namespace ShakeShack_Kiosk.View
     /// </summary>
     public partial class CardPaymentView : Page
     {
+        private PaymentViewModel paymentViewModel = PaymentViewModel.Instance;
         public CardPaymentView()
         {
             InitializeComponent();
@@ -27,8 +29,14 @@ namespace ShakeShack_Kiosk.View
         }
 
         private void webcam_QrDecoded(object sender, string e) {
-            // TODO: 결제 완료
-            tbRecog.Text = e; 
+            paymentViewModel.PayByCard(e);
+            if (paymentViewModel.OrderUser == null)
+            {
+                tbQRDecodedStatus.Text = "존재하지 않는 회원";
+            } else
+            {
+                // TODO: 결제 완료 페이지 
+            }
         }
     }
 }
