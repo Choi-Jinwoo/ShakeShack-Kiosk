@@ -115,7 +115,7 @@
                         TextWrapping="Wrap" 
                         FontSize="20 px"
                         FontWeight="Bold"
-                        Text="" 
+                        Text="Loading . . ." 
                         x:Name="runtime"    
                         VerticalAlignment="Center"/>
                 </Border>
