@@ -42,6 +42,7 @@ namespace ShakeShack_Kiosk.View
             if (tableViewModel.SelectedTable == null)
             {
                 MessageBox.Show("테이블을 선택해주세요");
+                
                 return;
             }
 
@@ -57,6 +58,7 @@ namespace ShakeShack_Kiosk.View
             if (table.IsUsing)
             {
                 MessageBox.Show("사용중인 테이블입니다");
+                lstTable.SelectedIndex = -1;
                 return;
             }
 

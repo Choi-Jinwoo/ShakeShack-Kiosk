@@ -66,7 +66,7 @@ namespace ShakeShack_Kiosk.ViewModel
         }
 
         // TODO: 매개변수 삭제
-        public void PayByCard(string userId)
+        public void PayByCard()
         {
             Pay(PaymentMethodEnum.CARD);
         }
@@ -89,6 +89,7 @@ namespace ShakeShack_Kiosk.ViewModel
                 };
 
                 orderHistoryDao.CreateOrderHistory(orderId, orderHistory);
+                tableViewModel.SelectedTable.PaidAt = DateTime.Now;
             }           
         }
 

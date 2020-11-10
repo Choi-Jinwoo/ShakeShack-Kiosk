@@ -14,8 +14,8 @@
         <TextBlock Text="현금 계산을 선택하셨습니다. 현금영수증카드를 제시해주세요"
                    FontSize="14" />
 
-        <TextBlock x:Name="tbOrderFoodTotalPrice"
-                   Text="{Binding OrderFoodTotalPrice, StringFormat={}총 가격: {0}원}" />
+        <TextBlock x:Name="tbOrderFoodTotalPrice" />
+
 
         <TextBlock x:Name="tbUserName"  Text="{Binding OrderUser.Name}"/>
         <TextBlock x:Name="tbUserId" Text="{Binding OrderUser.Id}"/>
@@ -26,9 +26,14 @@
 
         <Grid>
             <Button x:Name="btnPrePage"
-                    Content="이전" />
+                    Content="이전"
+                    Width="200"
+                    HorizontalAlignment="Left"
+                    Click="btnPrePage_Click"/>
             <Button x:Name="btnResultPaymentPage"
                     Content="다음"
+                    Width="200"
+                    HorizontalAlignment="Right"
                     Click="btnResultPaymentPage_Click"/>
         </Grid>
     </StackPanel>

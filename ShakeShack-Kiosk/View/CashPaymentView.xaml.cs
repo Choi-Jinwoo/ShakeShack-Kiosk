@@ -24,6 +24,8 @@ namespace ShakeShack_Kiosk.View
     public partial class CashPaymentView : Page
     {
         private PaymentViewModel paymentViewModel = PaymentViewModel.Instance;
+        private OrderFoodViewModel orderFoodViewModel = OrderFoodViewModel.Instance;
+
         public CashPaymentView()
         {
             InitializeComponent();
@@ -34,6 +36,7 @@ namespace ShakeShack_Kiosk.View
         private void CashPaymentView_Loaded(object sender, RoutedEventArgs e)
         {
             txtScanBarcode.Focus();
+            tbOrderFoodTotalPrice.Text = string.Format("총 가격 : {0}원",orderFoodViewModel.OrderFoodTotalPrice);
         }
 
         private void txtScanBarcode_KeyUp(object sender, KeyEventArgs e)
@@ -68,6 +71,14 @@ namespace ShakeShack_Kiosk.View
 
             paymentViewModel.PayByCash();
             NavigationService.Navigate(new Uri("/View/ResultPaymentView.xaml", UriKind.Relative));
+        }
+
+        private void btnPrePage_Click(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
         }
     }
 }

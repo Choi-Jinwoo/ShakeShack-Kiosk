@@ -12,7 +12,7 @@ namespace ShakeShack_Kiosk.Model
 
     static class Constants
     {
-        public const int EXPIRE_SECOND = 5;
+        public const int EXPIRE_SECOND = 60;
     }
 
     class DiningTable : INotifyPropertyChanged

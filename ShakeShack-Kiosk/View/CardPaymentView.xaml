@@ -10,17 +10,45 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        
+
+        <TextBlock Text="카드계산을 선택하셨습니다."/>
+
+        <StackPanel Grid.Row="1">
+            <TextBlock x:Name="tbQRDecodedStatus"
+                       Grid.Row="1"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center" />
+
+            <TextBlock x:Name="tbOrderFoodTotalPrice" />
+
+
+            <TextBlock x:Name="tbUserName"
+                       Text="{Binding OrderUser.Name}"/>
+            <TextBlock x:Name="tbUserId"
+                       Text="{Binding OrderUser.Id}"/>
+        </StackPanel>
+
         <qrcode:KQRWebCam x:Name="webcam"
-                          Grid.Row="0"
+                          Grid.Row="2"
                           Margin="12"
                           QrDecoded="webcam_QrDecoded" />
-        <TextBlock x:Name="tbQRDecodedStatus"
-                   Grid.Row="1"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center" />
+
+        <Grid Grid.Row="3">
+            <Button x:Name="btnPrePage"
+                    Content="이전"
+                    Width="200"
+                    HorizontalAlignment="Left"
+                    Click="btnPrePage_Click"/>
+            <Button x:Name="btnResultPaymentPage"
+                    Content="다음"
+                    Width="200"
+                    HorizontalAlignment="Right"
+                    Click="btnResultPaymentPage_Click"/>
+        </Grid>
     </Grid>
 </Page>
