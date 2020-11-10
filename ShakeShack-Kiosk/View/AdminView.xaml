@@ -87,7 +87,7 @@
                 Margin="33,24,34,25"
                 Width="1133"
                 HorizontalAlignment="Center"
-                CornerRadius="10"/>
+                CornerRadius="10" />
         </Grid>
 
         <Grid  

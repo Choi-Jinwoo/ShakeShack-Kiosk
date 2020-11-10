@@ -161,7 +161,7 @@
                                        FontSize="14"
                                        FontWeight="SemiBold"
                                        Grid.Row="2"
-                                       Text="{Binding Price, StringFormat={}{0}원}" />
+                                       Text="{Binding DiscountedPrice, StringFormat={}{0}원}" />
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>

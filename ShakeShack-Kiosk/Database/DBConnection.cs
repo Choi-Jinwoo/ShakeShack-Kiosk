@@ -39,5 +39,10 @@ namespace ShakeShack_Kiosk.Database
         {
             return command.ExecuteReader();
         }
+
+        internal void SetCommand(object getOrderHistoriesSQL)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

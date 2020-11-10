@@ -34,5 +34,33 @@ namespace ShakeShack_Kiosk.Database.Dao
 
             return 1;
         }
+
+        public List<OrderHistory> GetOrderHistories()
+        {
+            DBConnection connection = new DBConnection();
+            connection.Connect();
+            connection.SetCommand(OrderHistorySQLMapper.GetOrderHistoriesSQL);
+            MySqlDataReader reader = connection.ExecuteQuery();
+
+            List<OrderHistory> orderHistories = new List<OrderHistory>();
+            while (reader.Read())
+            {
+                OrderHistory orderHistory = new OrderHistory()
+                {
+                    OrderId = Convert.ToInt32(reader["order_id"]),
+                    UserId = (string)reader["user_id"],
+                    FoodId = Convert.ToInt32(reader["food_id"]),
+                    TableNumber = Convert.ToInt32(reader["table_number"]),
+                    Count = Convert.ToInt32(reader["count"]),
+                    PaymentMethod = Convert.ToInt32(reader["payment_method"]),
+                    CreatedAt = Convert.ToDateTime(reader["created_at"]),
+                    Price = Convert.ToInt32(reader["price"])
+                };
+
+                orderHistories.Add(orderHistory);
+            }
+
+            return orderHistories;
+         }
     }
 }

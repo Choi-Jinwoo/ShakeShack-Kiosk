@@ -85,11 +85,15 @@ namespace ShakeShack_Kiosk.ViewModel
                     FoodId = orderFood.Food.Id,
                     Count = orderFood.Count,
                     TableNumber = tableViewModel.SelectedTable?.Number,
-                    PaymentMethod = (int) paymentMethod
+                    PaymentMethod = (int) paymentMethod,
+                    Price = orderFood.Food.DiscountedPrice,
                 };
 
                 orderHistoryDao.CreateOrderHistory(orderId, orderHistory);
-                tableViewModel.SelectedTable.PaidAt = DateTime.Now;
+                if (tableViewModel.SelectedTable != null)
+                {
+                    tableViewModel.SelectedTable.PaidAt = DateTime.Now;
+                }
             }           
         }
 

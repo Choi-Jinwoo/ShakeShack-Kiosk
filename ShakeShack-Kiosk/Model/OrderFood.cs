@@ -17,7 +17,7 @@ namespace ShakeShack_Kiosk.Model
             {
                 count = value;
                 OnPropertyChanged("Count");
-                TotalPrice = Food.Price * Count;
+                TotalPrice = Food.DiscountedPrice * Count;
             }
         }
         private int totalPrice = 0;
@@ -33,7 +33,7 @@ namespace ShakeShack_Kiosk.Model
         public OrderFood(Food food)
         {
             this.Food = food;
-            TotalPrice = Food.Price * Count;
+            TotalPrice = Food.DiscountedPrice * Count;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
