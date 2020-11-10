@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.IO;
 
 namespace ShakeShack_Kiosk.View
 {
@@ -38,8 +39,9 @@ namespace ShakeShack_Kiosk.View
 
         private void runTime(object sender, EventArgs e)
         {
-            String time = App.time;
-            runtime.Text = time.ToString();
+            int time = App.time;
+            TimeSpan runTime = TimeSpan.FromSeconds(time);
+            runtime.Text = runTime.ToString("hh':'mm':'ss"); 
         }
     }
 }
