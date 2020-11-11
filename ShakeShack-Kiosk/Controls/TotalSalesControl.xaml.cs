@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShakeShack_Kiosk.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,35 @@ namespace ShakeShack_Kiosk.Controls
     /// </summary>
     public partial class TotalSalesControl : UserControl
     {
+        private OrderHistoryViewModel orderHistoryViewModel = OrderHistoryViewModel.Instance;
         public TotalSalesControl()
         {
             InitializeComponent();
+            orderHistoryViewModel.LoadOrderHistory();
+        }
+
+        private void btnCashSales_Click(object sender, RoutedEventArgs e)
+        {
+            orderHistoryViewModel.SetCashCashPayment();
+            UpdateSalesUI();
+        }
+
+        private void btnCardSales_Click(object sender, RoutedEventArgs e)
+        {
+            orderHistoryViewModel.SetCardPaymentSales();
+            UpdateSalesUI();
+        }
+        private void btnAllSales_Click(object sender, RoutedEventArgs e)
+        {
+            orderHistoryViewModel.SetAllPayemntSales();
+            UpdateSalesUI();
+        }
+
+        private void UpdateSalesUI()
+        {
+            this.tbTotalSales.Text = string.Format($"총 매출: {orderHistoryViewModel.TotalSales}원");
+            this.tbTotalSalesExcludeDiscount.Text = string.Format($"순수 매출: {orderHistoryViewModel.TotalSalesExcludeDiscount}원");
+            this.tbDiscountPrice.Text = string.Format($"할인 금액: {orderHistoryViewModel.DiscountPrice}원");
         }
     }
 }

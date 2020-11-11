@@ -50,16 +50,23 @@ namespace ShakeShack_Kiosk.Database.Dao
                     OrderId = Convert.ToInt32(reader["order_id"]),
                     UserId = (string)reader["user_id"],
                     FoodId = Convert.ToInt32(reader["food_id"]),
-                    TableNumber = Convert.ToInt32(reader["table_number"]),
                     Count = Convert.ToInt32(reader["count"]),
                     PaymentMethod = Convert.ToInt32(reader["payment_method"]),
                     CreatedAt = Convert.ToDateTime(reader["created_at"]),
                     Price = Convert.ToInt32(reader["price"])
                 };
+                if (reader["table_number"] == DBNull.Value)
+                {
+                    orderHistory.TableNumber = null;
+                } else
+                {
+                    orderHistory.TableNumber = Convert.ToInt32(reader["table_number"]);
+                }
 
                 orderHistories.Add(orderHistory);
             }
 
+            connection.CloseConnection();
             return orderHistories;
          }
     }

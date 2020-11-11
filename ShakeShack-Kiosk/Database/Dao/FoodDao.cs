@@ -26,16 +26,19 @@ namespace ShakeShack_Kiosk.Database.Dao
                 Food food = new Food()
                 {
                     Id = Convert.ToInt32(reader["id"]),
-                    Name = (string)reader["name"],
                     CategoryId = Convert.ToInt32(reader["category_id"]),
+                    Name = Convert.ToString(reader["name"]),
+                    ImagePath = Convert.ToString(reader["image_path"]),
                     Price = Convert.ToInt32(reader["price"]),
-                    ImagePath = (string)reader["image_path"],
-                    DiscountedPrice = Convert.ToInt32(reader["discount_price"])
+                    DiscountedPrice = Convert.ToInt32(reader["discounted_price"])
                 };
+
+                connection.CloseConnection();
 
                 return food;
             }
 
+            connection.CloseConnection();
             return null;
 
         }

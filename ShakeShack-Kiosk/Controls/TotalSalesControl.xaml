@@ -8,11 +8,20 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <StackPanel>
-            <TextBlock x:Name="tbTotalSales"/>
-            <TextBlock x:Name="tbTotalSalesExcludeDiscount"/>
-            <TextBlock x:Name="tbDiscountPrice"/>
-            <TextBlock x:Name="tbCardSales"/>
-            <TextBlock x:Name="tbCashSales"/>
+            <TextBlock Text="매출" FontSize="20"/>
+
+            <Button x:Name="btnAllSales"
+                    Content="종합 매출액"
+                    Click="btnAllSales_Click"/>
+            <Button x:Name="btnCashSales"
+                    Content="현금 매출액"
+                    Click="btnCashSales_Click"/>
+            <Button x:Name="btnCardSales"
+                    Content="카드 매출액"
+                    Click="btnCardSales_Click"/>
+            <TextBlock x:Name="tbTotalSales" />
+            <TextBlock x:Name="tbTotalSalesExcludeDiscount" />
+            <TextBlock x:Name="tbDiscountPrice" />
         </StackPanel>
     </Grid>
 </UserControl>

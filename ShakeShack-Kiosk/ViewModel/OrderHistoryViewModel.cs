@@ -1,4 +1,5 @@
 ﻿using ShakeShack_Kiosk.Database.Dao;
+using ShakeShack_Kiosk.Enum;
 using ShakeShack_Kiosk.Model;
 using System;
 using System.Collections.Generic;
@@ -10,18 +11,65 @@ namespace ShakeShack_Kiosk.ViewModel
 {
     class OrderHistoryViewModel
     {
+        private static OrderHistoryViewModel instance;
+
+        private OrderHistoryViewModel()
+        {
+            LoadOrderHistory();
+        }
+
+        public void LoadOrderHistory()
+        {
+            originOrderHistories = orderHistoryDao.GetOrderHistories();
+            orderHistories = originOrderHistories;
+        }
+
+        public static OrderHistoryViewModel Instance 
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new OrderHistoryViewModel();
+                }
+                return instance;
+            }
+        }
+
         OrderHistoryDao orderHistoryDao = new OrderHistoryDao();
         FoodDao foodDao = new FoodDao();
+
+        private List<OrderHistory> orderHistories = new List<OrderHistory>();
+        private List<OrderHistory> originOrderHistories = new List<OrderHistory>();
 
         public int TotalSales;
         public int DiscountPrice;
         public int TotalSalesExcludeDiscount;
 
-        // TODO: 검증
-        public OrderHistoryViewModel()
+        public void SetAllPayemntSales()
         {
-            List<OrderHistory> orderHistories = orderHistoryDao.GetOrderHistories();
+            orderHistories = originOrderHistories;
+            this.CalcSales();
+        }
 
+        public void SetCardPaymentSales()
+        {
+            orderHistories = originOrderHistories
+                .Where(orderHistory => orderHistory.PaymentMethod == (int)PaymentMethodEnum.CARD)
+                .ToList();
+            this.CalcSales();
+        }
+
+        public void SetCashCashPayment()
+        {
+            orderHistories = originOrderHistories
+                .Where(orderHistory => orderHistory.PaymentMethod == (int) PaymentMethodEnum.CASH)
+                .ToList();
+            this.CalcSales();
+        }
+
+        private void CalcSales()
+        {
             int totalSales = 0;
             int totalSalesExcludeDiscount= 0;
             foreach (OrderHistory orderHistory in orderHistories)

@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.IO;
+using ShakeShack_Kiosk.ViewModel;
 
 namespace ShakeShack_Kiosk.View
 {
@@ -28,7 +29,6 @@ namespace ShakeShack_Kiosk.View
             DispatcherTimer Timer = new DispatcherTimer();
             Timer.Interval = TimeSpan.FromSeconds(1);
             Timer.Tick += runTime;
-
             Timer.Start();
         }
 

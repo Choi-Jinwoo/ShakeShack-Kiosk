@@ -1,7 +1,12 @@
-﻿using ShakeShack_Kiosk.Controls;
+﻿using Newtonsoft.Json;
+using ShakeShack_Kiosk.Controls;
+using ShakeShack_Kiosk.Enum;
+using ShakeShack_Kiosk.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,16 +21,30 @@ using System.Windows.Shapes;
 
 namespace ShakeShack_Kiosk
 {
-    /// <summary>
-    /// MainWindow.xaml에 대한 상호 작용 논리
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
             titleControl.OnNavigateToHome += TitleControl_OnNavigateToHome; ;
+
+            try
+            {
+                Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                IPEndPoint ep = new IPEndPoint(IPAddress.Parse("10.80.162.152"), 90);
+                sock.Connect(ep);
+
+                MsgPacket packet = new MsgPacket();
+                packet.MSGType = (int) MSGTypeEnum.LOGIN;
+                packet.Id = "2119";
+
+                string strJson = JsonConvert.SerializeObject(packet);
+                sock.Send(Encoding.UTF8.GetBytes(strJson));
+            } catch (Exception e)
+            { }
+
         }
+
 
         private void TitleControl_OnNavigateToHome(object sender, EventArgs e)
         {

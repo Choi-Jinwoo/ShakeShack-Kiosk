@@ -51,6 +51,7 @@ namespace ShakeShack_Kiosk.View
 
         private void btnPrePage_Click(object sender, RoutedEventArgs e)
         {
+            paymentViewModel.InitInstance();
             if (NavigationService.CanGoBack)
             {
                 NavigationService.GoBack();
