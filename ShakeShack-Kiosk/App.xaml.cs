@@ -20,9 +20,9 @@ namespace ShakeShack_Kiosk
         public static int time;
         Stopwatch watch = new Stopwatch();
         int now = 0;
-        static String path = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "Config/test.txt";
+        static String path = "C/timedata/test.txt";
+        static String FolderPath = "C/timedata";
         String textValue = System.IO.File.ReadAllText(path);
-
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -34,6 +34,7 @@ namespace ShakeShack_Kiosk
             watch.Start();
             Timer.Start();
             this.Exit += App_Exit;
+            CreateDirectory(FolderPath);
         }
 
         private void App_Exit(object sender, ExitEventArgs e)
@@ -48,13 +49,21 @@ namespace ShakeShack_Kiosk
             }
             else
             {
+                CreateDirectory(FolderPath);   
                 System.IO.File.Create(path);
             }
         }
         private void Timer_Tick(object sender, EventArgs e)
         {
+
             now++;
-            time = now + int.Parse(textValue);
+            if (textValue == "")
+            {
+                time = now;
+            } else
+            {
+                time = now + int.Parse(textValue);
+            }
 
         }
     }
