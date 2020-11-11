@@ -87,6 +87,9 @@
     <Compile Include="Controls\TitleControl.xaml.cs">
       <DependentUpon>TitleControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TotalSalesControl.xaml.cs">
+      <DependentUpon>TotalSalesControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converter\BoolToVisibilityConverter.cs" />
     <Compile Include="Converter\TableUsingBackgroundConverter.cs" />
     <Compile Include="Database\Dao\OrderHistoryDao.cs" />
@@ -98,6 +101,8 @@
     <Compile Include="Database\Dao\UserDao.cs" />
     <Compile Include="Database\SQLMapper\UserSQLMapper.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="ViewModel\OrderFoodViewModel.cs" />
+    <Compile Include="ViewModel\OrderHistoryViewModel.cs" />
     <Compile Include="ViewModel\PaymentViewModel.cs" />
     <Compile Include="ViewModel\TableViewModel.cs" />
     <Compile Include="View\AdminView.xaml.cs">
@@ -128,6 +133,10 @@
       <DependentUpon>TableView.xaml</DependentUpon>
     </Compile>
     <Page Include="Controls\TitleControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TotalSalesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -190,7 +199,6 @@
     <Compile Include="Model\DiningTable.cs" />
     <Compile Include="Model\Food.cs" />
     <Compile Include="Model\OrderFood.cs" />
-    <Compile Include="ViewModel\OrderFoodViewModel.cs" />
     <Compile Include="ViewModel\OrderViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
