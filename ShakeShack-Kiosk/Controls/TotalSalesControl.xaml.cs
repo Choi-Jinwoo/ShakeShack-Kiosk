@@ -20,6 +20,7 @@ namespace ShakeShack_Kiosk.Controls
     /// </summary>
     public partial class TotalSalesControl : UserControl
     {
+        private 
         public TotalSalesControl()
         {
             InitializeComponent();
