@@ -18,49 +18,50 @@ namespace ShakeShack_Kiosk
     public partial class App : Application
     {
         public static int time;
-        Stopwatch watch = new Stopwatch();
         int now = 0;
-        static String path = "C/timedata/test.txt";
-        static String FolderPath = "C/timedata";
-        String textValue = System.IO.File.ReadAllText(path);
+        static String path = AppDomain.CurrentDomain.BaseDirectory + @"\time.txt";
+        String textValue = "";
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
+            FileInfo fileInfo = new FileInfo(path);
+
+            if (fileInfo.Exists)
+            {
+                textValue = System.IO.File.ReadAllText(path);
+            } else
+            {
+                //CreateDirectory(FolderPath);
+                System.IO.File.Create(path);
+            }
+
             DispatcherTimer Timer = new DispatcherTimer();
             Timer.Interval = new TimeSpan(0, 0, 1);
             Timer.Tick += Timer_Tick;
-            watch.Start();
             Timer.Start();
             this.Exit += App_Exit;
-            CreateDirectory(FolderPath);
+            
         }
 
         private void App_Exit(object sender, ExitEventArgs e)
         {
-            
             FileInfo fileInfo = new FileInfo(path);
-
 
             if (fileInfo.Exists)
             {
-                System.IO.File.WriteAllText(path, time.ToString());
-            }
-            else
-            {
-                CreateDirectory(FolderPath);   
-                System.IO.File.Create(path);
+                File.WriteAllText(path, time.ToString());
             }
         }
         private void Timer_Tick(object sender, EventArgs e)
         {
-
             now++;
             if (textValue == "")
             {
                 time = now;
-            } else
+            }
+            else
             {
                 time = now + int.Parse(textValue);
             }
