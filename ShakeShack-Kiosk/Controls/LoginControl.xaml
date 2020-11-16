@@ -1,0 +1,77 @@
+﻿<UserControl x:Class="ShakeShack_Kiosk.Controls.LoginControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ShakeShack_Kiosk.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="317*"/>
+            <ColumnDefinition Width="83*"/>
+        </Grid.ColumnDefinitions>
+        <Polygon 
+            Points="0,0 80,50, 0,100" 
+            Fill="#61b146"
+            Opacity="0.4" 
+            VerticalAlignment="top"
+            HorizontalAlignment="Center"
+            Margin="0,80,0,0"/>
+        <TextBlock 
+            HorizontalAlignment="Center" 
+            TextWrapping="Wrap" 
+            Text="WELCOME" 
+            VerticalAlignment="Top" 
+            FontSize="40px"
+            FontWeight="600"
+            Foreground="#61b146" Margin="300,80,134,0"/>
+
+        <TextBlock 
+            HorizontalAlignment="Center" 
+            TextWrapping="Wrap" 
+            Text="Shake Shake Buger" 
+            VerticalAlignment="Top" 
+            FontSize="20px"
+            FontWeight="600"
+            Foreground="#61b146" Margin="308,140,142,0"/>
+
+        <TextBox 
+            HorizontalAlignment="Center" 
+            TextWrapping="Wrap" 
+            Width="300px"
+            Height="26"
+            Text="ID" 
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Center" 
+            Padding="6, 0, 0, 0" Margin="250,212,84,212"/>
+
+        <TextBox 
+            HorizontalAlignment="Center" 
+            TextWrapping="Wrap" 
+            Width="300px"
+            Height="26"
+            Text="PASSWORD" 
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Center"
+            Margin="250,252,84,172" 
+            Padding="6, 0, 0, 0"/>
+
+        <CheckBox
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center" Margin="250,288,304,148">자동로그인</CheckBox>
+
+        <Button 
+            Content="로그인"
+            Width="300px"
+            Height="40px"
+            FontSize="18"
+            FontWeight="Bold"
+            Background="#61b146"
+            Foreground="#ffffff"
+            BorderBrush="Transparent"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            Click="btnOrder_Click" Margin="250,0,84,60"/>
+    </Grid>
+</UserControl>
