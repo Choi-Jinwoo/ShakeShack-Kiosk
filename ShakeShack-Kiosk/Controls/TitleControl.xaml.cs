@@ -1,4 +1,5 @@
-﻿using ShakeShack_Kiosk.ViewModel;
+﻿using ShakeShack_Kiosk.Connection;
+using ShakeShack_Kiosk.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,7 @@ namespace ShakeShack_Kiosk.Controls
         {
             InitializeComponent();
             tbClock.Text = DateTime.Now.ToString();
+            this.DataContext = SocketConnection.Instance;
         }
 
         private void TitleControl_Loaded(object sender, RoutedEventArgs e)

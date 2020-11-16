@@ -57,9 +57,7 @@ namespace ShakeShack_Kiosk
         private void Timer_Tick(object sender, EventArgs e)
         {
             now++;
-<<<<<<< HEAD
             time = now + int.Parse("1");
-=======
             if (textValue == "")
             {
                 time = now;
@@ -68,8 +66,6 @@ namespace ShakeShack_Kiosk
             {
                 time = now + int.Parse(textValue);
             }
->>>>>>> 98ec37657ce55f1b0250157745d6d2664bdb09a5
-
         }
     }
 }

@@ -11,7 +11,7 @@
         <StackPanel>
             <controls:TitleControl x:Name="titleControl"/>
             <Frame x:Name="frPage"
-                   Source="/View/HomeView.xaml"
+                   Source="/View/LoginView.xaml"
                    NavigationUIVisibility="Hidden" />
         </StackPanel>
     </Grid>

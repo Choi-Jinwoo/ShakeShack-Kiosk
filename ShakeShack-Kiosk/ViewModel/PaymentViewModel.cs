@@ -1,4 +1,6 @@
-﻿using ShakeShack_Kiosk.Database.Dao;
+﻿using Newtonsoft.Json;
+using ShakeShack_Kiosk.Connection;
+using ShakeShack_Kiosk.Database.Dao;
 using ShakeShack_Kiosk.Enum;
 using ShakeShack_Kiosk.Model;
 using System;
@@ -77,6 +79,8 @@ namespace ShakeShack_Kiosk.ViewModel
             int orderId = orderHistoryDao.GetLastOrderId() + 1;
             this.OrderId = orderId;
 
+            List<MsgPacketMenu> menus = new List<MsgPacketMenu>();
+
             foreach (OrderFood orderFood in orderFoodViewModel.OrderFoods)
             {
                 OrderHistory orderHistory = new OrderHistory()
@@ -94,7 +98,37 @@ namespace ShakeShack_Kiosk.ViewModel
                 {
                     tableViewModel.SelectedTable.PaidAt = DateTime.Now;
                 }
+
+                menus.Add(new MsgPacketMenu()
+                {
+                    Name = orderFood.Food.Name,
+                    Price = orderFood.Food.DiscountedPrice,
+                    Count = orderFood.Count,
+                });
             }           
+
+            Task orderTask = new Task(() =>
+            {
+                try
+                {
+                    SocketConnection con = SocketConnection.Instance;
+                    con.Connect();
+
+                    MsgPacket packet = new MsgPacket()
+                    {
+                        MSGType = (int)MSGTypeEnum.ORDER_INFO,
+                        Id = "2119",
+                        Menus = menus,
+                        OrderNumber = orderId > 100 ? (orderId % 100).ToString("000") : orderId.ToString("000"),
+                    };
+
+                    string strJson = JsonConvert.SerializeObject(packet);
+                    con.Sock.Send(Encoding.UTF8.GetBytes(strJson));
+                } catch (Exception e)
+                { }
+            });
+
+            orderTask.Start();
         }
 
         public void InitInstance()

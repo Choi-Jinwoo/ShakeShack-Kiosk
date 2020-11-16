@@ -87,6 +87,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Config\DBConfig.cs" />
+    <Compile Include="Controls\LoginControl.xaml.cs">
+      <DependentUpon>LoginControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TitleControl.xaml.cs">
       <DependentUpon>TitleControl.xaml</DependentUpon>
     </Compile>
@@ -106,6 +109,7 @@
     <Compile Include="Database\Dao\UserDao.cs" />
     <Compile Include="Database\SQLMapper\UserSQLMapper.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Connection\SocketConnection.cs" />
     <Compile Include="ViewModel\OrderFoodViewModel.cs" />
     <Compile Include="ViewModel\OrderHistoryViewModel.cs" />
     <Compile Include="ViewModel\PaymentViewModel.cs" />
@@ -122,6 +126,9 @@
     <Compile Include="View\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\OrderView.xaml.cs">
       <DependentUpon>OrderView.xaml</DependentUpon>
     </Compile>
@@ -137,6 +144,10 @@
     <Compile Include="View\TableView.xaml.cs">
       <DependentUpon>TableView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\LoginControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\TitleControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -177,6 +188,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\HomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

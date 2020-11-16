@@ -22,5 +22,8 @@
                Margin="0,10,80,10"
                MouseDown="imgHome_MouseDown"
                HorizontalAlignment="Right"/>
+
+        <TextBlock x:Name="tbServerStatus"
+                   Text="{Binding IsConnected}"/>
     </Grid>
 </UserControl>

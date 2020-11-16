@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using ShakeShack_Kiosk.Connection;
 using ShakeShack_Kiosk.Controls;
 using ShakeShack_Kiosk.Enum;
 using ShakeShack_Kiosk.Model;
@@ -28,21 +29,24 @@ namespace ShakeShack_Kiosk
             InitializeComponent();
             titleControl.OnNavigateToHome += TitleControl_OnNavigateToHome; ;
 
-            try
+            Task loginTask = new Task(() =>
             {
-                Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                IPEndPoint ep = new IPEndPoint(IPAddress.Parse("10.80.162.152"), 90);
-                sock.Connect(ep);
+                try
+                {
+                    SocketConnection con = SocketConnection.Instance;
+                    con.Connect();
 
-                MsgPacket packet = new MsgPacket();
-                packet.MSGType = (int) MSGTypeEnum.LOGIN;
-                packet.Id = "2119";
+                    MsgPacket packet = new MsgPacket();
+                    packet.MSGType = (int) MSGTypeEnum.LOGIN;
+                    packet.Id = "2119";
 
-                string strJson = JsonConvert.SerializeObject(packet);
-                sock.Send(Encoding.UTF8.GetBytes(strJson));
-            } catch (Exception e)
-            { }
+                    string strJson = JsonConvert.SerializeObject(packet);
+                    con.Sock.Send(Encoding.UTF8.GetBytes(strJson));
+                } catch (Exception e)
+                { }
+            });
 
+            loginTask.Start();
         }
 
 
