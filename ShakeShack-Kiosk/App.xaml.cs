@@ -19,22 +19,29 @@ namespace ShakeShack_Kiosk
     {
         public static int time;
         int now = 0;
-        static String path = AppDomain.CurrentDomain.BaseDirectory + @"\time.txt";
+        static String timePath = AppDomain.CurrentDomain.BaseDirectory + @"\time.txt";
+        static String savePath = AppDomain.CurrentDomain.BaseDirectory + @"\auto_save.txt";
+
         String textValue = "";
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
-            FileInfo fileInfo = new FileInfo(path);
+            FileInfo fileInfo = new FileInfo(timePath);
+            FileInfo fileInfo2 = new FileInfo(savePath);
 
             if (fileInfo.Exists)
             {
-                textValue = System.IO.File.ReadAllText(path);
+                textValue = System.IO.File.ReadAllText(timePath);
             } else
             {
-                //CreateDirectory(FolderPath);
-                System.IO.File.Create(path);
+                System.IO.File.Create(timePath);
+            }
+
+            if (!fileInfo.Exists)
+            {
+                System.IO.File.Create(savePath);
             }
 
             DispatcherTimer Timer = new DispatcherTimer();
@@ -47,11 +54,11 @@ namespace ShakeShack_Kiosk
 
         private void App_Exit(object sender, ExitEventArgs e)
         {
-            FileInfo fileInfo = new FileInfo(path);
+            FileInfo fileInfo = new FileInfo(timePath);
 
             if (fileInfo.Exists)
             {
-                File.WriteAllText(path, time.ToString());
+                File.WriteAllText(timePath, time.ToString());
             }
         }
         private void Timer_Tick(object sender, EventArgs e)

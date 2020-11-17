@@ -14,14 +14,12 @@ namespace ShakeShack_Kiosk.ViewModel
         private static OrderFoodViewModel instance;
         private OrderFoodViewModel() { }
 
-        public static OrderFoodViewModel Instance 
-        {
-            get
-            {
-                if (instance == null)
-                {
+        public static OrderFoodViewModel Instance {
+            get {
+                if (instance == null) {
                     instance = new OrderFoodViewModel();
                 }
+
                 return instance;
             }
         }
@@ -29,11 +27,10 @@ namespace ShakeShack_Kiosk.ViewModel
         public ObservableCollection<OrderFood> OrderFoods { get; private set; } = new ObservableCollection<OrderFood>();
 
         private int orderFoodTotalPrice { get; set; } = 0;
-        public int OrderFoodTotalPrice
-        {
+        public int OrderFoodTotalPrice {
             get => orderFoodTotalPrice;
-            private set
-            {
+            
+            private set {
                 orderFoodTotalPrice = value;
                 OnPropertyChanged("OrderFoodTotalPrice");
             }
@@ -41,10 +38,8 @@ namespace ShakeShack_Kiosk.ViewModel
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void OnPropertyChanged(string name)
-        {
-            if (PropertyChanged != null)
-            {
+        public void OnPropertyChanged(string name) {
+            if (PropertyChanged != null) {
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
@@ -77,9 +72,10 @@ namespace ShakeShack_Kiosk.ViewModel
             orderFood.Count += 1;
             OrderFoodTotalPrice = CalcOrderFoodTotalPrice();
         }
+
         public void DecreaseOrderFood(OrderFood orderFood)
         {
-            if (orderFood.Count <= 1)
+            if (orderFood.Count < 1)
             {
                 OrderFoods.Remove(orderFood);
             } else
