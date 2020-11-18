@@ -1,19 +1,31 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using ShakeShack_Kiosk.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace ShakeShack_Kiosk.Connection
 {
-    class SocketConnection : INotifyPropertyChanged
+    static class Constants
+    {
+        public const int BUFFER_SIZE = 1024;
+    }
+    public class SocketConnection : INotifyPropertyChanged
     {
         private static SocketConnection instance;
-        public Socket Sock { get; private set; }
+        public TcpClient Client { get; private set; }
+        private Thread receiveThread { get; set; }
+
         private bool isConnected;
+        private bool isSendResult { get; set; } = false;
         public bool IsConnected
         {
             get => isConnected;
@@ -40,44 +52,80 @@ namespace ShakeShack_Kiosk.Connection
 
         public void Connect()
         {
-            Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            Sock = sock;
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse("10.80.162.152"), 80);
+            Client = new TcpClient();
 
             try
             {
-                Sock.Connect(ep);
+                Client.Connect(ep);
                 IsConnected = true;
-            } catch (SocketException e)
-            { }
 
-            Thread thread = new Thread(() =>
+                receiveThread = new Thread(new ThreadStart(ReceiveMessage));
+                receiveThread.Start();
+            } catch (Exception e)
             {
-                while (true)
+                IsConnected = false;
+                Debug.WriteLine(e);
+            }
+
+        }
+
+        public void SendMessage(MsgPacket packet)
+        {
+            Task sendMessageTask = new Task(() =>
+            {
+                try
                 {
-                    Console.WriteLine(IsConnected);
-                    try
-                    {
-                        // TODO: 수정
-                        if (Sock.Poll(1000, SelectMode.SelectRead))
-                        {
-                            if (IsConnected == false)
-                            {
-                                Sock.Connect(ep);
-                                IsConnected = true;
-                            }
-                        } else
-                        {
-                            IsConnected = false;
-                        }
-                    } catch (SocketException e)
-                    {
-                        IsConnected = false;
-                    }
+                    string strJson = JsonConvert.SerializeObject(packet);
+                    byte[] byteData = Encoding.UTF8.GetBytes(strJson);
+
+                    NetworkStream networkStream = Client.GetStream();
+                    networkStream.Write(byteData, 0, byteData.Length);
+                    isSendResult = true;
+                }
+                catch (Exception e)
+                {
+                    IsConnected = false;
+                    Debug.WriteLine(e);
                 }
             });
 
-            thread.Start();
+            sendMessageTask.Start();
+        }
+
+        public void ReceiveMessage()
+        {
+            try
+            {
+                while (true)
+                {
+                    NetworkStream networkStream = Client.GetStream();
+                    byte[] buffer = new byte[Constants.BUFFER_SIZE];
+                    int length = networkStream.Read(buffer, 0, buffer.Length);
+
+                    if (length <= 0)
+                    {
+                        IsConnected = false;
+                        receiveThread.Abort();
+                        break;
+                    }
+
+                    string response = Encoding.UTF8.GetString(buffer, 0, length);
+
+                    if (isSendResult == true)
+                    {
+                        isSendResult = false;
+                        continue;
+                    }
+
+                    MessageBox.Show(response);
+                }
+            } catch (Exception e)
+            {
+                IsConnected = false;
+                Debug.WriteLine(e);
+                receiveThread.Abort();
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

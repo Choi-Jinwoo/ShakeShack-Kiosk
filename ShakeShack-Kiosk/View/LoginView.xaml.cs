@@ -20,7 +20,7 @@ namespace ShakeShack_Kiosk.View
     /// </summary>
     public partial class LoginView : Page
     {
-        static String savePath = AppDomain.CurrentDomain.BaseDirectory + @"\auto_save.txt";
+        string savePath = AppDomain.CurrentDomain.BaseDirectory + @"\auto_save.txt";
         public LoginView()
         {
             InitializeComponent();
@@ -30,10 +30,17 @@ namespace ShakeShack_Kiosk.View
 
         private void LoginView_Loaded(object sender, RoutedEventArgs e)
         {
-            if (System.IO.File.ReadAllText(savePath) == "1")
+            try
             {
-                NavigationService.Navigate(new Uri("View/HomeView.xaml", UriKind.Relative));
-                return;
+                if (System.IO.File.ReadAllText(savePath) == "1")
+                {
+                    NavigationService.Navigate(new Uri("View/HomeView.xaml", UriKind.Relative));
+                    return;
+                }
+            } catch (Exception ex)
+            {
+                System.IO.File.Create(savePath).Close();
+                System.IO.File.WriteAllText(savePath, "0");
             }
         }
 

@@ -111,8 +111,7 @@ namespace ShakeShack_Kiosk.ViewModel
             {
                 try
                 {
-                    SocketConnection con = SocketConnection.Instance;
-                    con.Connect();
+                    SocketConnection socketCon = SocketConnection.Instance;
 
                     MsgPacket packet = new MsgPacket()
                     {
@@ -122,8 +121,8 @@ namespace ShakeShack_Kiosk.ViewModel
                         OrderNumber = orderId > 100 ? (orderId % 100).ToString("000") : orderId.ToString("000"),
                     };
 
-                    string strJson = JsonConvert.SerializeObject(packet);
-                    con.Sock.Send(Encoding.UTF8.GetBytes(strJson));
+
+                    socketCon.SendMessage(packet);
                 } catch (Exception e)
                 { }
             });

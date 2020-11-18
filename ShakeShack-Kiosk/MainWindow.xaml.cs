@@ -5,6 +5,7 @@ using ShakeShack_Kiosk.Enum;
 using ShakeShack_Kiosk.Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -29,25 +30,16 @@ namespace ShakeShack_Kiosk
             InitializeComponent();
             titleControl.OnNavigateToHome += TitleControl_OnNavigateToHome; ;
 
-            Task loginTask = new Task(() =>
+            SocketConnection socketCon = SocketConnection.Instance;
+            socketCon.Connect();
+
+            MsgPacket packet = new MsgPacket()
             {
-                try
-                {
-                    SocketConnection con = SocketConnection.Instance;
-                    con.Connect();
+                MSGType = (int)MSGTypeEnum.LOGIN,
+                Id = "2119"
+            };
 
-                    MsgPacket packet = new MsgPacket();
-                    packet.MSGType = (int) MSGTypeEnum.LOGIN;
-                    packet.Id = "2119";
-
-                    string strJson = JsonConvert.SerializeObject(packet);
-                    con.Sock.Send(Encoding.UTF8.GetBytes(strJson));
-                } catch (Exception e)
-                {
-                }
-            });
-
-            loginTask.Start();
+            socketCon.SendMessage(packet);
         }
 
 
