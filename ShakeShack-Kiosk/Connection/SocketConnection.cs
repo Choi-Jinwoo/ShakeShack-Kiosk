@@ -43,20 +43,41 @@ namespace ShakeShack_Kiosk.Connection
             Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             Sock = sock;
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse("10.80.162.152"), 80);
-            Sock.Connect(ep);
-            IsConnected = true;
 
-            Thread thread = new Thread(new ThreadStart(() =>
+            try
+            {
+                Sock.Connect(ep);
+                IsConnected = true;
+            } catch (SocketException e)
+            { }
+
+            Thread thread = new Thread(() =>
             {
                 while (true)
                 {
-                    if (Sock.Connected == false)
+                    Console.WriteLine(IsConnected);
+                    try
                     {
-                        SocketConnection.Instance.IsConnected = false;
-                        break;
+                        // TODO: 수정
+                        if (Sock.Poll(1000, SelectMode.SelectRead))
+                        {
+                            if (IsConnected == false)
+                            {
+                                Sock.Connect(ep);
+                                IsConnected = true;
+                            }
+                        } else
+                        {
+                            IsConnected = false;
+                        }
+                    } catch (SocketException e)
+                    {
+                        IsConnected = false;
                     }
                 }
-            }));
+            });
+
+            thread.Start();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

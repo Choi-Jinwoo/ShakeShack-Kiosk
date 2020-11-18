@@ -34,6 +34,7 @@ namespace ShakeShack_Kiosk.Controls
             InitializeComponent();
             tbClock.Text = DateTime.Now.ToString();
             this.DataContext = SocketConnection.Instance;
+            Loaded += TitleControl_Loaded;
         }
 
         private void TitleControl_Loaded(object sender, RoutedEventArgs e)

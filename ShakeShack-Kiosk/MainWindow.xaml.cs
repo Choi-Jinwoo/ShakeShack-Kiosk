@@ -43,7 +43,8 @@ namespace ShakeShack_Kiosk
                     string strJson = JsonConvert.SerializeObject(packet);
                     con.Sock.Send(Encoding.UTF8.GetBytes(strJson));
                 } catch (Exception e)
-                { }
+                {
+                }
             });
 
             loginTask.Start();

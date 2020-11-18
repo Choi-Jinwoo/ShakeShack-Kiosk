@@ -97,6 +97,7 @@
       <DependentUpon>TotalSalesControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converter\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converter\ServerStatusConverter.cs" />
     <Compile Include="Converter\TableUsingBackgroundConverter.cs" />
     <Compile Include="Database\Dao\OrderHistoryDao.cs" />
     <Compile Include="Database\Dao\UserDao.cs" />
