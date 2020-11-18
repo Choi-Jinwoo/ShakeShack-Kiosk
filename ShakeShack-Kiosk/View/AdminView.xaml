@@ -25,7 +25,7 @@
             <controls:TotalSalesControl
                 Grid.Column="0" />
             <TextBlock x:Name="runtime" 
-                       Text="Loading"
+                       Text="Loading . . ."
                        Grid.Column="1" />
         </Grid>
 
