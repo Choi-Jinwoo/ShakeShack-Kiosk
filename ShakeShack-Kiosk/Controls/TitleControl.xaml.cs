@@ -1,4 +1,4 @@
-﻿using ShakeShack_Kiosk.Connection;
+﻿using ShakeShack_Kiosk.Network;
 using ShakeShack_Kiosk.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -65,6 +65,14 @@ namespace ShakeShack_Kiosk.Controls
                 }
             }
 
+        }
+
+        private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            new Task(() =>
+            {
+                SocketConnection.Instance.Connect();
+            }).Start();
         }
     }
 }

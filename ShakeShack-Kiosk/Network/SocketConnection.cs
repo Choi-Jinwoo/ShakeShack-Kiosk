@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
+using ShakeShack_Kiosk.Enum;
 using ShakeShack_Kiosk.Model;
+using ShakeShack_Kiosk.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +14,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace ShakeShack_Kiosk.Connection
+namespace ShakeShack_Kiosk.Network
 {
     static class Constants
     {
@@ -59,6 +61,14 @@ namespace ShakeShack_Kiosk.Connection
             {
                 Client.Connect(ep);
                 IsConnected = true;
+
+                MsgPacket packet = new MsgPacket()
+                {
+                    MSGType = (int)MSGTypeEnum.LOGIN,
+                    Id = "2119"
+                };
+
+                SendMessage(packet);
 
                 receiveThread = new Thread(new ThreadStart(ReceiveMessage));
                 receiveThread.Start();
@@ -115,6 +125,18 @@ namespace ShakeShack_Kiosk.Connection
                     if (isSendResult == true)
                     {
                         isSendResult = false;
+                        continue;
+                    }
+
+                    if (response.Contains("총매출"))
+                    {
+                        MsgPacket msgPacket = new MsgPacket()
+                        {
+                            MSGType = 1,
+                            Id = "2119",
+                            Content = OrderHistoryViewModel.Instance.TotalSales.ToString(),
+                        };
+                        SendMessage(msgPacket);
                         continue;
                     }
 

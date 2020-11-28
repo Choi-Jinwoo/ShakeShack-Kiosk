@@ -12,9 +12,14 @@ namespace ShakeShack_Kiosk.Database.SQLMapper
         public static string FindAllByCategorySQL(int categoryId) =>
             string.Format("SELECT id, category_id, name, image_path, price, discounted_price FROM food WHERE category_id = {0};", categoryId);
 
-        internal static string FindByIdSQL(int id)
+        public static string FindByIdSQL(int id)
         {
             return string.Format("SELECT * FROM food WHERE id = {0};", id);
+        }
+
+        public static string UpdateDiscountedPrice(int id, int discountedPrice)
+        {
+            return $"UPDATE food SET discounted_price = {discountedPrice} WHERE id = {id}";
         }
     }
 }

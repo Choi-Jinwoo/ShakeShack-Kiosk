@@ -22,7 +22,7 @@ namespace ShakeShack_Kiosk.Database.SQLMapper
         }
 
         public static string GetLastOrderIdSQL => "SELECT MAX(order_id) as order_id FROM order_history";
-
         public static string GetOrderHistoriesSQL => "SELECT * FROM order_history";
+        public static string GetOrderHistoryByDate(string date) => $"SELECT * FROM order_history WHERE DATE(created_at) = DATE('{date}')";
     }
 }

@@ -10,5 +10,6 @@ namespace ShakeShack_Kiosk.Database.SQLMapper
     {
         public static string FindUserSQL(string id) =>
             string.Format("SELECT id, name FROM user WHERE id = '{0}';", id);
+        public static string FindUsersSQL = string.Format("SELECT id, name FROM user;");
     }
 }

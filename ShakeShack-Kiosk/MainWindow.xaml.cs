@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using ShakeShack_Kiosk.Connection;
+using ShakeShack_Kiosk.Network;
 using ShakeShack_Kiosk.Controls;
 using ShakeShack_Kiosk.Enum;
 using ShakeShack_Kiosk.Model;
@@ -30,18 +30,11 @@ namespace ShakeShack_Kiosk
             InitializeComponent();
             titleControl.OnNavigateToHome += TitleControl_OnNavigateToHome; ;
 
-            SocketConnection socketCon = SocketConnection.Instance;
-            socketCon.Connect();
-
-            MsgPacket packet = new MsgPacket()
+            new Task(() =>
             {
-                MSGType = (int)MSGTypeEnum.LOGIN,
-                Id = "2119"
-            };
-
-            socketCon.SendMessage(packet);
+                SocketConnection.Instance.Connect();
+            }).Start();
         }
-
 
         private void TitleControl_OnNavigateToHome(object sender, EventArgs e)
         {

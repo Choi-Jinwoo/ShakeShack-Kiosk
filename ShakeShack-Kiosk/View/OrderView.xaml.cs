@@ -126,14 +126,26 @@ namespace ShakeShack_Kiosk.View
         }
         private void btnOrder_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/View/DiningAreaView.xaml", UriKind.Relative));
+            if (orderFoodViewModel.OrderFoodSize > 0)
+            {
+                NavigationService.Navigate(new Uri("/View/DiningAreaView.xaml", UriKind.Relative));
+            }
         }
 
         private void btnCancelOrder_Click(object sender, RoutedEventArgs e)
         {
-            orderFoodViewModel.InitInstance();
-            tableViewModel.InitInstance();
-            NavigationService.Navigate(new Uri("/View/HomeView.xaml", UriKind.Relative));
+            if (orderFoodViewModel.OrderFoodSize > 0)
+            {
+                if (MessageBox.Show( "주문 내용이 취소됩니다", "ShakeShack", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    orderFoodViewModel.InitInstance();
+                    tableViewModel.InitInstance();
+                    NavigationService.Navigate(new Uri("/View/HomeView.xaml", UriKind.Relative));
+                }
+            } else
+            {
+                NavigationService.Navigate(new Uri("/View/HomeView.xaml", UriKind.Relative));
+            }
         }
     }
 }

@@ -20,7 +20,6 @@ namespace ShakeShack_Kiosk.View
     /// </summary>
     public partial class LoginView : Page
     {
-        string savePath = AppDomain.CurrentDomain.BaseDirectory + @"\auto_save.txt";
         public LoginView()
         {
             InitializeComponent();
@@ -30,17 +29,9 @@ namespace ShakeShack_Kiosk.View
 
         private void LoginView_Loaded(object sender, RoutedEventArgs e)
         {
-            try
+            if (App.AutoLogin == true)
             {
-                if (System.IO.File.ReadAllText(savePath) == "1")
-                {
-                    NavigationService.Navigate(new Uri("View/HomeView.xaml", UriKind.Relative));
-                    return;
-                }
-            } catch (Exception ex)
-            {
-                System.IO.File.Create(savePath).Close();
-                System.IO.File.WriteAllText(savePath, "0");
+                NavigationService.Navigate(new Uri("/View/HomeView.xaml", UriKind.Relative));
             }
         }
 
@@ -51,15 +42,7 @@ namespace ShakeShack_Kiosk.View
                 MessageBox.Show("아아디, 비밀번호가 틀렸습니다.");
             } else
             {
-                if (cbAutoLogin.IsChecked == true)
-                {
-                    System.IO.File.WriteAllText(savePath, "1");
-                } else
-                {
-                    System.IO.File.WriteAllText(savePath, "0");
-                }
-
-                NavigationService.Navigate(new Uri("View/HomeView.xaml", UriKind.Relative));
+                NavigationService.Navigate(new Uri("/View/HomeView.xaml", UriKind.Relative));
             }
         }
     }

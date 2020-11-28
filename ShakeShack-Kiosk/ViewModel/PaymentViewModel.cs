@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using ShakeShack_Kiosk.Connection;
+using ShakeShack_Kiosk.Network;
 using ShakeShack_Kiosk.Database.Dao;
 using ShakeShack_Kiosk.Enum;
 using ShakeShack_Kiosk.Model;
@@ -116,6 +116,7 @@ namespace ShakeShack_Kiosk.ViewModel
                     MsgPacket packet = new MsgPacket()
                     {
                         MSGType = (int)MSGTypeEnum.ORDER_INFO,
+                        Group = true,
                         Id = "2119",
                         Menus = menus,
                         OrderNumber = orderId > 100 ? (orderId % 100).ToString("000") : orderId.ToString("000"),

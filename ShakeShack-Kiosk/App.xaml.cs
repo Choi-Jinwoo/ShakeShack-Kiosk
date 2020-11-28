@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Threading;
 using System.IO;
 using static System.IO.Directory;
+using System.ComponentModel;
 
 namespace ShakeShack_Kiosk
 {
@@ -17,62 +18,54 @@ namespace ShakeShack_Kiosk
     /// </summary>
     public partial class App : Application
     {
-        public static int time;
-        int now = 0;
-        static String timePath = AppDomain.CurrentDomain.BaseDirectory + @"\time.txt";
-        static String savePath = AppDomain.CurrentDomain.BaseDirectory + @"\auto_save.txt";
+        public static int TotalTime { get; set; } = 0;
+        public static bool AutoLogin { get; set; } = false;
 
-        String textValue = "";
+        public static string timePath = @"C:\time.txt";
+        public static string autoSavePath = @"C:\auto_save.txt";
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
-            FileInfo fileInfo = new FileInfo(timePath);
-            FileInfo fileInfo2 = new FileInfo(savePath);
-
-            if (fileInfo.Exists)
+            if (File.Exists(timePath))
             {
-                textValue = System.IO.File.ReadAllText(timePath);
+                TotalTime = Convert.ToInt32(File.ReadAllText(timePath));
             } else
             {
-                System.IO.File.Create(timePath);
+                File.Create(timePath).Close();
+                File.WriteAllText(timePath, "0");
             }
 
-            if (!fileInfo.Exists)
+            if (File.Exists(autoSavePath))
             {
-                System.IO.File.Create(savePath);
+                if (File.ReadAllText(autoSavePath) == "0")
+                {
+                    AutoLogin = false;
+                } else
+                {
+                    AutoLogin = true;
+                }
+            } else
+            {
+                File.Create(autoSavePath).Close();
+                File.WriteAllText(autoSavePath, "0");
             }
 
             DispatcherTimer Timer = new DispatcherTimer();
-            Timer.Interval = new TimeSpan(0, 0, 1);
+            Timer.Interval = TimeSpan.FromSeconds(1);
             Timer.Tick += Timer_Tick;
             Timer.Start();
-            this.Exit += App_Exit;
-            
         }
 
         private void App_Exit(object sender, ExitEventArgs e)
         {
-            FileInfo fileInfo = new FileInfo(timePath);
-
-            if (fileInfo.Exists)
-            {
-                File.WriteAllText(timePath, time.ToString());
-            }
+            File.WriteAllText(timePath, TotalTime.ToString());
         }
+
         private void Timer_Tick(object sender, EventArgs e)
         {
-            now++;
-            time = now + int.Parse("1");
-            if (textValue == "")
-            {
-                time = now;
-            }
-            else
-            {
-                time = now + int.Parse(textValue);
-            }
+            TotalTime += 1;
         }
     }
 }

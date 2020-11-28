@@ -43,7 +43,8 @@
                      Fill="{Binding IsConnected, Converter={StaticResource ServerStatusConverter}}" />
 
             <TextBlock Text="서버 연결 상태"
-                       Grid.Column="1"/>
+                       Grid.Column="1"
+                       MouseDown="TextBlock_MouseDown"/>
         </Grid>
 
         <Image x:Name="imgHome"

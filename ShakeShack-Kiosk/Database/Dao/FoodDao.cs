@@ -72,5 +72,15 @@ namespace ShakeShack_Kiosk.Database.Dao
 
             return foods;
         }
+
+        public void DiscountFood(int id, int discountPrice)
+        {
+            DBConnection connection = new DBConnection();
+
+            connection.Connect();
+            connection.SetCommand(FoodSQLMapper.UpdateDiscountedPrice(id, discountPrice));
+            connection.Execute();
+            connection.CloseConnection();
+        }
     }
 }

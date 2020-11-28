@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ShakeShack_Kiosk.Model
 {
-    class User
+    class SalesByTime
     {
-        public string Id { get; set; }
+        public int TimeIdx { get; set; }
         public string Name { get; set; }
-        public int TotalSales { get; set; }
+        public int Sales { get; set; }
     }
 }

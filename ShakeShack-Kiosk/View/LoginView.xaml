@@ -61,11 +61,6 @@
             Margin="250,252,84,172" 
             Padding="6, 0, 0, 0"/>
 
-        <CheckBox
-            x:Name="cbAutoLogin"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center" Margin="250,288,304,148">자동로그인</CheckBox>
-
         <Button 
             x:Name="btnLogin"
             Content="로그인"

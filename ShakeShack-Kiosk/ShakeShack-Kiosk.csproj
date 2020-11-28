@@ -35,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="MySqlConnector, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d33d3e53aa5f8c92, processorArchitecture=MSIL">
       <HintPath>..\packages\MySqlConnector.1.0.1\lib\net471\MySqlConnector.dll</HintPath>
     </Reference>
@@ -87,14 +93,17 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Config\DBConfig.cs" />
-    <Compile Include="Controls\LoginControl.xaml.cs">
-      <DependentUpon>LoginControl.xaml</DependentUpon>
+    <Compile Include="Controls\DiscountControl.xaml.cs">
+      <DependentUpon>DiscountControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MemberControl.xaml.cs">
+      <DependentUpon>MemberControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StatControl.xaml.cs">
+      <DependentUpon>StatControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\TitleControl.xaml.cs">
       <DependentUpon>TitleControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\TotalSalesControl.xaml.cs">
-      <DependentUpon>TotalSalesControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converter\BoolToVisibilityConverter.cs" />
     <Compile Include="Converter\ServerStatusConverter.cs" />
@@ -105,19 +114,20 @@
     <Compile Include="Database\SQLMapper\UserSQLMapper.cs" />
     <Compile Include="Enum\MSGTypeEnum.cs" />
     <Compile Include="Enum\PaymentMethodEnum.cs" />
+    <Compile Include="Model\ChartItem.cs" />
+    <Compile Include="Model\FoodChartItem.cs" />
     <Compile Include="Model\MsgPacket.cs" />
     <Compile Include="Model\OrderHistory.cs" />
     <Compile Include="Database\Dao\UserDao.cs" />
     <Compile Include="Database\SQLMapper\UserSQLMapper.cs" />
+    <Compile Include="Model\SalesByTime.cs" />
     <Compile Include="Model\User.cs" />
-    <Compile Include="Connection\SocketConnection.cs" />
+    <Compile Include="Network\SocketConnection.cs" />
     <Compile Include="ViewModel\OrderFoodViewModel.cs" />
     <Compile Include="ViewModel\OrderHistoryViewModel.cs" />
     <Compile Include="ViewModel\PaymentViewModel.cs" />
     <Compile Include="ViewModel\TableViewModel.cs" />
-    <Compile Include="View\AdminView.xaml.cs">
-      <DependentUpon>AdminView.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="ViewModel\UserViewModel.cs" />
     <Compile Include="View\CashPaymentView.xaml.cs">
       <DependentUpon>CashPaymentView.xaml</DependentUpon>
     </Compile>
@@ -129,6 +139,9 @@
     </Compile>
     <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManagementView.xaml.cs">
+      <DependentUpon>ManagementView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\OrderView.xaml.cs">
       <DependentUpon>OrderView.xaml</DependentUpon>
@@ -145,15 +158,19 @@
     <Compile Include="View\TableView.xaml.cs">
       <DependentUpon>TableView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Controls\LoginControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Controls\DiscountControl.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MemberControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\StatControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\TitleControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\TotalSalesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -174,10 +191,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\AdminView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\CashPaymentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -191,6 +204,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManagementView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -34,5 +34,27 @@ namespace ShakeShack_Kiosk.Database.Dao
             connection.CloseConnection();
             return user;
         }
+        public List<User> GetUsers()
+        {
+            DBConnection connection = new DBConnection();
+            connection.Connect();
+            connection.SetCommand(UserSQLMapper.FindUsersSQL);
+
+            MySqlDataReader reader = connection.ExecuteQuery();
+
+            List<User> users = new List<User>();
+            while (reader.Read())
+            {
+                User user = new User()
+                {
+                    Id = (string)reader["id"],
+                    Name = (string)reader["name"],
+                };
+                users.Add(user);
+            }
+
+            connection.CloseConnection();
+            return users;
+        }
     }
 }

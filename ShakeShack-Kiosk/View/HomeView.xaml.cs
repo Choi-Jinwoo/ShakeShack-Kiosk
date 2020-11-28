@@ -24,6 +24,27 @@ namespace ShakeShack_Kiosk.View
         {
             InitializeComponent();
             mdAdPlayer.Play();
+            Loaded += HomeView_Loaded;
+        }
+
+        private void HomeView_Loaded(object sender, RoutedEventArgs e)
+        {
+            Window window = Window.GetWindow(this);
+            window.KeyDown += Window_KeyDown;
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (NavigationService != null)
+            {
+                if (NavigationService.CurrentSource == new Uri("View/HomeView.xaml", UriKind.Relative)) 
+                {
+                    if (e.Key == Key.F2)
+                    {
+                        NavigationService.Navigate(new Uri("/View/ManagementView.xaml", UriKind.Relative));
+                    }
+                }
+            }
         }
 
         private void btnOrder_Click(object sender, RoutedEventArgs e)
@@ -40,7 +61,7 @@ namespace ShakeShack_Kiosk.View
 
         private void btnAdmin_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/View/AdminView.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/View/ManagementView.xaml", UriKind.Relative));
         }
     }
 }
