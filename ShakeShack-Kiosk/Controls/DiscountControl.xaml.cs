@@ -24,6 +24,7 @@ namespace ShakeShack_Kiosk.Controls
     public partial class DiscountControl : UserControl
     {
         List<Food> foods = new List<Food>();
+        List<Food> originFoods;
 
         private FoodDao foodDao = new FoodDao();
 
@@ -34,17 +35,30 @@ namespace ShakeShack_Kiosk.Controls
             dgMenu.ItemsSource = foods;
         }
 
-        private void dgMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-        }
-
         private void dgMenu_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             if (e.Row.Item != null)
             {
                 Food food = (Food)e.Row.Item;
-                foodDao.DiscountFood(food.Id, food.DiscountedPrice);
             }
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            List<Food> foods = (List<Food>)dgMenu.ItemsSource;
+
+            for (int i = 0; i < foods.Count; i += 1)
+            {
+                foodDao.UpdateFood(foods[i].Id, foods[i]);
+            }
+
+            MessageBox.Show("저장 성공");
+        }
+
+        private void btnReset_Click(object sender, RoutedEventArgs e)
+        {
+            foods = foodDao.GetFoods();
+            dgMenu.ItemsSource = foods;
         }
     }
 }

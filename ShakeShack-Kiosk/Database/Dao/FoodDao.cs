@@ -30,7 +30,8 @@ namespace ShakeShack_Kiosk.Database.Dao
                     Name = Convert.ToString(reader["name"]),
                     ImagePath = Convert.ToString(reader["image_path"]),
                     Price = Convert.ToInt32(reader["price"]),
-                    DiscountedPrice = Convert.ToInt32(reader["discounted_price"])
+                    DiscountedPrice = Convert.ToInt32(reader["discounted_price"]),
+                    IsSoldOut = Convert.ToBoolean(reader["is_sold_out"]),
                 };
 
                 connection.CloseConnection();
@@ -62,7 +63,8 @@ namespace ShakeShack_Kiosk.Database.Dao
                     Name = Convert.ToString(reader["name"]),
                     ImagePath = Convert.ToString(reader["image_path"]),
                     Price = Convert.ToInt32(reader["price"]),
-                    DiscountedPrice = Convert.ToInt32(reader["discounted_price"])
+                    DiscountedPrice = Convert.ToInt32(reader["discounted_price"]),
+                    IsSoldOut = Convert.ToBoolean(reader["is_sold_out"]),
                 };
 
                 foods.Add(food);
@@ -73,12 +75,12 @@ namespace ShakeShack_Kiosk.Database.Dao
             return foods;
         }
 
-        public void DiscountFood(int id, int discountPrice)
+        public void UpdateFood(int id, Food food)
         {
             DBConnection connection = new DBConnection();
 
             connection.Connect();
-            connection.SetCommand(FoodSQLMapper.UpdateDiscountedPrice(id, discountPrice));
+            connection.SetCommand(FoodSQLMapper.UpdateFood(id, food));
             connection.Execute();
             connection.CloseConnection();
         }

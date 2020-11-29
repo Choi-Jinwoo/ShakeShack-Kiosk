@@ -13,22 +13,39 @@
             </DataTemplate>
         </Grid.Resources>
 
-        <DataGrid x:Name="dgMenu"
-                  CanUserResizeColumns="False"
-                  CanUserResizeRows="False"
-                  AutoGenerateColumns="False"
-                  SelectionChanged="dgMenu_SelectionChanged"
-                  CellEditEnding="dgMenu_CellEditEnding" >
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="메뉴" 
-                                    IsReadOnly="True"
-                                    Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="가격"
-                                    IsReadOnly="True"
-                                    Binding="{Binding Price}"/>
-                <DataGridTextColumn Header="할인 가격"
-                                    Binding="{Binding DiscountedPrice}"/>
-            </DataGrid.Columns>
-        </DataGrid>
+
+        <StackPanel>
+            <DataGrid x:Name="dgMenu"
+                      Height="400"
+                      CanUserResizeColumns="False"
+                      CanUserResizeRows="False"
+                      AutoGenerateColumns="False" >
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="메뉴" 
+                                        IsReadOnly="True"
+                                        Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="가격"
+                                        IsReadOnly="True"
+                                        Binding="{Binding Price}"/>
+                    <DataGridTextColumn Header="할인 가격"
+                                        Binding="{Binding DiscountedPrice}"/>
+                    <DataGridCheckBoxColumn Header="품절"
+                                            Binding="{Binding IsSoldOut}" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="btnSave"
+                        Content="저장"
+                        Click="btnSave_Click"
+                        Width="100"/>
+                <Button x:Name="btnReset"
+                        Content="초기화"
+                        Click="btnReset_Click"
+                        Width="100"/>
+            </StackPanel>
+            
+        </StackPanel>
     </Grid>
 </UserControl>

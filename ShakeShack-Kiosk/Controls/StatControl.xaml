@@ -5,123 +5,230 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ShakeShack_Kiosk.Controls" xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
+             HorizontalAlignment="Stretch"
+             HorizontalContentAlignment="Stretch"
+             VerticalContentAlignment="Stretch"
+             VerticalAlignment="Stretch"
+             Height="auto"
+             Width="auto"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid >
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0"
-                        x:Name="spTotalSales">
+            <Grid Grid.Row="0" MinHeight="250">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
 
-                <Grid Width="500">
-                    <Button x:Name="btnAllTotalSales"
-                            Content="전체 매출액"
-                            Click="btnAllTotalSales_Click"
-                            HorizontalAlignment="Left"
-                            Width="100"/>
-                    <Button x:Name="btnCardTotalSales"
-                            Content="카드 매출액"
-                            Click="btnCardTotalSales_Click"
-                            HorizontalAlignment="Center"
-                            Width="100"/>
-                    <Button x:Name="btnCashTotalSales"
-                            Content="현금 매출액"
-                            Click="btnCashTotalSales_Click"
-                            HorizontalAlignment="Right"
-                            Width="100"/>
+                <Grid Grid.Column="0"
+                      x:Name="gdTotalSales"
+                      Margin="20,20,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="10*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal"
+                                Grid.Row="0">
+                        <Button x:Name="btnAllTotalSales"
+                                Content="전체 매출액"
+                                Click="btnAllTotalSales_Click"
+                                Background="#ffffff"
+                                Foreground="#61b146"
+                                FontWeight="DemiBold"
+                                BorderThickness="0,0,2,0"
+                                BorderBrush="#61b146"
+                                Width="80"/>
+                        <Button x:Name="btnCardTotalSales"
+                                Content="카드 매출액"
+                                Background="#ffffff"
+                                Foreground="#61b146"
+                                FontWeight="DemiBold"
+                                BorderThickness="0,0,2,0"
+                                BorderBrush="#61b146"
+                                Click="btnCardTotalSales_Click"
+                                Width="80"/>
+                        <Button x:Name="btnCashTotalSales"
+                                Content="현금 매출액"
+                                Background="#ffffff"
+                                Foreground="#61b146"
+                                BorderThickness="0"
+                                BorderBrush="#61b146"
+                                FontWeight="DemiBold"
+                                Click="btnCashTotalSales_Click"
+                                Width="80"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1"
+                                HorizontalAlignment="Left"
+                                Margin="10,10,0,0">
+                        <TextBlock x:Name="tbTotalSales"
+                                   FontSize="16"
+                                   FontWeight="SemiBold"
+                                   Text="{Binding TotalSales, StringFormat={}총 매출 : {0}원}" />
+                        <TextBlock x:Name="tbTotalSalesExDiscount"
+                                   FontSize="16"
+                                   FontWeight="SemiBold"
+                                   Text="{Binding TotalSalesExcludeDiscount, StringFormat={}순수 매출 : {0}원}"/>
+                        <TextBlock x:Name="tbDiscountPrice"
+                                   FontSize="16"
+                                   FontWeight="SemiBold"
+                                   Text="{Binding DiscountPrice, StringFormat={}할인 금액 : {0}원}"/>
+                    </StackPanel>
+                </Grid>
+                
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Orientation="Horizontal"
+                                Grid.Row="0">
+                        <Button x:Name="btnMenuStat"
+                                Background="#ffffff"
+                                Foreground="#61b146"
+                                FontWeight="DemiBold"
+                                BorderThickness="0,0,1,0"
+                                Height="20"
+                                BorderBrush="#61b146"
+                                Content="메뉴"
+                                Width="80"
+                                Click="btnMenuStat_Click"/>
+                        <Button x:Name="btnCategoryStat"
+                                Content="카테고리"
+                                Background="#ffffff"
+                                Foreground="#61b146"
+                                FontWeight="DemiBold"
+                                BorderBrush="#61b146"
+                                BorderThickness="1,0,0,0"
+                                Height="20"
+                                Width="80"
+                                Click="btnCategoryStat_Click"/>
+                    </StackPanel>
+                    <lvc:PieChart Name="Chart"
+                                  Series="{Binding SeriesCollection}"
+                                  Grid.Row="1"/>
+                    <StackPanel Orientation="Horizontal"
+                                Grid.Row="2">
+                        <Button x:Name="btnPriceGraph"
+                                Content="가격별"
+                                Background="#ffffff"
+                                Foreground="#61b146"
+                                FontWeight="DemiBold"
+                                BorderBrush="#61b146"
+                                BorderThickness="0,0,1,0"
+                                Height="20"
+                                Width="80"
+                                Click="btnPriceGraph_Click"/>
+                        <Button x:Name="btnCountGraph"
+                                Content="개수별"
+                                Background="#ffffff"
+                                Foreground="#61b146"
+                                FontWeight="DemiBold"
+                                BorderBrush="#61b146"
+                                BorderThickness="1,0,0,0"
+                                Height="20"
+                                Width="80"
+                                Click="btnCountGraph_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" MinHeight="100">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="8*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ComboBox x:Name="cbTable"
+                              Grid.Column="0"
+                              Height="20"
+                              VerticalAlignment="Top"
+                              SelectionChanged="cbTable_SelectionChanged">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Number}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <DataGrid x:Name="dgFoodTable"
+                              Grid.Column="1"
+                              IsReadOnly="True"
+                              AutoGenerateColumns="False"
+                              CanUserResizeRows="False"
+                              CanUserReorderColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="번호" 
+                                                Binding="{Binding Id}"/>
+                            <DataGridTextColumn Header="이름" 
+                                                Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="총 가격" 
+                                                Binding="{Binding Price}"/>
+                            <DataGridTextColumn Header="수량" 
+                                                Binding="{Binding Count}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <DataGrid x:Name="dgCategoryTable"
+                              Grid.Column="2"
+                              IsReadOnly="True"
+                              AutoGenerateColumns="False"
+                              CanUserResizeRows="False"
+                              CanUserReorderColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="번호" 
+                                                Binding="{Binding Id}"/>
+                            <DataGridTextColumn Header="이름" 
+                                                Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="총 가격" 
+                                                Binding="{Binding Price}"/>
+                            <DataGridTextColumn Header="수량" 
+                                                Binding="{Binding Count}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
 
-                <TextBlock x:Name="tbTotalSales"
-                           HorizontalAlignment="Center"
-                           Text="{Binding TotalSales, StringFormat={}총 매출 : {0}원}" />
-                <TextBlock x:Name="tbTotalSalesExDiscount"
-                           HorizontalAlignment="Center"
-                           Text="{Binding TotalSalesExcludeDiscount, StringFormat={}순수 매출 : {0}원}"/>
-                <TextBlock x:Name="tbDiscountPrice"
-                           HorizontalAlignment="Center"
-                           Text="{Binding DiscountPrice, StringFormat={}할인 금액 : {0}원}"/>
-            </StackPanel>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="20*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Name="tbTodayTotalSales"
+                               Grid.Row="0"
+                               FontSize="16"
+                               FontWeight="DemiBold"
+                               HorizontalAlignment="Center"
+                               Margin="0,20,0,20"/>
 
-            <StackPanel Grid.Row="1">
-                <Button x:Name="btnMenuStat"
-                        Content="메뉴"
-                        Width="50"
-                        Click="btnMenuStat_Click"/>
-                <Button x:Name="btnCategoryStat"
-                        Content="카테고리"
-                        Width="50"
-                        Click="btnCategoryStat_Click"/>
-                <lvc:PieChart Name="Chart"
-                              Series="{Binding SeriesCollection}"
-                              HorizontalAlignment="Left"
-                              InnerRadius="100"
-                              Margin="100,50,0,0"/>
-                <Button x:Name="btnPriceGraph"
-                        Content="가격별"
-                        Width="50"
-                        Click="btnPriceGraph_Click"/>
-                <Button x:Name="btnCountGraph"
-                        Content="개수별"
-                        Width="50"
-                        Click="btnCountGraph_Click"/>
-                <ComboBox x:Name="cbTable"
-                          SelectionChanged="cbTable_SelectionChanged">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Number}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-                <DataGrid x:Name="dgFoodTable"
-                          IsReadOnly="True"
-                          AutoGenerateColumns="False"
-                          CanUserResizeRows="False"
-                          CanUserReorderColumns="False">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="번호" 
-                                            Binding="{Binding Id}"/>
-                        <DataGridTextColumn Header="이름" 
-                                            Binding="{Binding Name}"/>
-                        <DataGridTextColumn Header="총 가격" 
-                                            Binding="{Binding Price}"/>
-                        <DataGridTextColumn Header="수량" 
-                                            Binding="{Binding Count}"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+                    <lvc:CartesianChart Name="SalesChart"
+                                        MinHeight="200"
+                                        Grid.Row="1"
+                                        Series="{Binding SalesSeriesCollection}" >
+                        <lvc:CartesianChart.AxisX>
+                            <lvc:Axis Title="Hour" Labels="{Binding Labels}" />
+                        </lvc:CartesianChart.AxisX>
+                        <lvc:CartesianChart.AxisY>
+                            <lvc:Axis Title="Sales" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+                        </lvc:CartesianChart.AxisY>
+                    </lvc:CartesianChart>
+                </Grid>
+            </Grid>
 
-                <DataGrid x:Name="dgCategoryTable"
-                          IsReadOnly="True"
-                          AutoGenerateColumns="False"
-                          CanUserResizeRows="False"
-                          CanUserReorderColumns="False">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="번호" 
-                                            Binding="{Binding Id}"/>
-                        <DataGridTextColumn Header="이름" 
-                                            Binding="{Binding Name}"/>
-                        <DataGridTextColumn Header="총 가격" 
-                                            Binding="{Binding Price}"/>
-                        <DataGridTextColumn Header="수량" 
-                                            Binding="{Binding Count}"/>
-                    </DataGrid.Columns>
-                </DataGrid>
 
-                <TextBlock x:Name="tbTodayTotalSales" />
-
-                <lvc:CartesianChart Name="SalesChart"
-                                    Height="200"
-                                    Series="{Binding SalesSeriesCollection}" >
-                    <lvc:CartesianChart.AxisX>
-                        <lvc:Axis Title="Hour" Labels="{Binding Labels}" />
-                    </lvc:CartesianChart.AxisX>
-                    <lvc:CartesianChart.AxisY>
-                        <lvc:Axis Title="Sales" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
-                    </lvc:CartesianChart.AxisY>
-                </lvc:CartesianChart>
-            </StackPanel>
 
         </Grid>
     </Grid>

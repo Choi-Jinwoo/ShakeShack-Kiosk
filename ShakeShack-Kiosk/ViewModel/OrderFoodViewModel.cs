@@ -89,6 +89,8 @@ namespace ShakeShack_Kiosk.ViewModel
 
         public void AddOrderFood(Food food)
         {
+            if (food.IsSoldOut == true) return;
+
             OrderFood existOrderFood = GetExistFood(food);
 
             // 해당 음식 존재하지 않는다면 리스트에 추가

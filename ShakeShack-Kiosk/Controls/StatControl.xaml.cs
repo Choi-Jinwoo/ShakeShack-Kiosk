@@ -56,7 +56,7 @@ namespace ShakeShack_Kiosk.Controls
         {
             InitializeComponent();
 
-            spTotalSales.DataContext = orderHistoryViewModel;
+            gdTotalSales.DataContext = orderHistoryViewModel;
             dgFoodTable.ItemsSource = orderHistoryViewModel.GetFoodChartItemByTable(tableViewModel.tables[0].Number);
             dgCategoryTable.ItemsSource = orderHistoryViewModel.GetCategoryChartItemsByTable(tableViewModel.tables[0].Number);
             cbTable.ItemsSource = tableViewModel.tables;

@@ -14,5 +14,6 @@ namespace ShakeShack_Kiosk.Model
         public int Price { get; set; }
         public string ImagePath { get; set; }
         public int DiscountedPrice { get; set; }
+        public bool IsSoldOut { get; set; }
     }
 }

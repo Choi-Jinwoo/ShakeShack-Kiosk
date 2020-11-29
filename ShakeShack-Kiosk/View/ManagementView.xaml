@@ -11,43 +11,66 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="15*" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0"
+              Height="50">
             <TextBlock x:Name="tbRunTimer"
+                       FontSize="18"
+                       FontWeight="SemiBold"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
                        Text="로딩중..."/>
             <CheckBox x:Name="cbAutoLogin"
                       Content="자동로그인"
                       HorizontalAlignment="Right"
+                      VerticalAlignment="Center"
+                      Margin="0,0,30,0"
                       Checked="cbAutoLogin_Checked"
                       Unchecked="cbAutoLogin_Unchecked"/>
         </Grid>
 
         <Grid Grid.Row="1"
               Width="150"
+              Height="25"
               HorizontalAlignment="Left">
             <Button x:Name="btnMember"
                     Content="회원"
                     Width="50"
+                    FontSize="12"
+                    FontWeight="Bold"
+                    BorderThickness="0"
+                    Background="#61b146"
+                    Foreground="#ffffff"
                     Click="btnMember_Click"
-                    HorizontalAlignment="Left" />
+                    HorizontalAlignment="Left"/>
             <Button x:Name="btnStat"
                     Content="통계"
                     Width="50"
+                    FontSize="12"
+                    FontWeight="Bold"
+                    BorderThickness="0"
+                    Background="#61b146"
+                    Foreground="#ffffff"
                     Click="btnStat_Click"
                     HorizontalAlignment="Center"/>
             <Button x:Name="btnDiscount"
                     Content="할인"
                     Width="50"
+                    FontSize="12"
+                    FontWeight="Bold"
+                    BorderThickness="0"
+                    Background="#61b146"
+                    Foreground="#ffffff"
                     HorizontalAlignment="Right"
                     Click="btnDiscount_Click"/>
         </Grid>
 
         <controls:MemberControl x:Name="ucMember"
-                                Grid.Row="2"/>
+                                Grid.Row="2" />
         <controls:StatControl x:Name="ucStat"
                               Grid.Row="2"
                               Visibility="Hidden"/>

@@ -4,11 +4,14 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ShakeShack_Kiosk.View"
+      xmlns:converter="clr-namespace:ShakeShack_Kiosk.Converter"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="OrderView">
 
     <Page.Resources>
+        <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+
         <Style x:Key="mediumGreenBtnStyle"
                TargetType="Button">
             <Setter Property="Template">
@@ -143,6 +146,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1*" />
                                     <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*" />
                                     <RowDefinition Height="auto" />
                                 </Grid.RowDefinitions>
 
@@ -156,11 +160,18 @@
                                        FontWeight="SemiBold"
                                        Grid.Row="1"
                                        Content="{Binding Name}" />
-                                <TextBlock x:Name="tbFoodPrice"
+                                <TextBlock x:Name="tbIsSoldOut"
                                        HorizontalAlignment="Center"
                                        FontSize="14"
                                        FontWeight="SemiBold"
                                        Grid.Row="2"
+                                       Text="품절"
+                                       Visibility="{Binding IsSoldOut, Converter={StaticResource BoolToVisibilityConverter}}" />
+                                <TextBlock x:Name="tbFoodPrice"
+                                       HorizontalAlignment="Center"
+                                       FontSize="14"
+                                       FontWeight="SemiBold"
+                                       Grid.Row="3"
                                        Text="{Binding DiscountedPrice, StringFormat={}{0}원}" />
                             </Grid>
                         </DataTemplate>

@@ -133,6 +133,7 @@ namespace ShakeShack_Kiosk.Network
                         MsgPacket msgPacket = new MsgPacket()
                         {
                             MSGType = 1,
+                            Group = true,
                             Id = "2119",
                             Content = OrderHistoryViewModel.Instance.TotalSales.ToString(),
                         };
