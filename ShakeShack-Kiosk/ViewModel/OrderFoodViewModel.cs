@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace ShakeShack_Kiosk.ViewModel
 {
+    // 싱글톤 클래스
     class OrderFoodViewModel : INotifyPropertyChanged
     {
         private static OrderFoodViewModel instance;
@@ -36,13 +37,7 @@ namespace ShakeShack_Kiosk.ViewModel
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void OnPropertyChanged(string name) {
-            if (PropertyChanged != null) {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
-        }
+        public int OrderFoodSize => OrderFoods.Count;
 
         private int CalcOrderFoodTotalPrice()
         {
@@ -85,8 +80,6 @@ namespace ShakeShack_Kiosk.ViewModel
             OrderFoodTotalPrice = CalcOrderFoodTotalPrice();
         }
 
-        public int OrderFoodSize => OrderFoods.Count;
-
         public void AddOrderFood(Food food)
         {
             if (food.IsSoldOut == true) return;
@@ -103,11 +96,13 @@ namespace ShakeShack_Kiosk.ViewModel
             }
             OrderFoodTotalPrice = CalcOrderFoodTotalPrice();
         }
+
         public void RemoveOrderFood(OrderFood orderFood)
         {
             OrderFoods.Remove(orderFood);
             OrderFoodTotalPrice = CalcOrderFoodTotalPrice();
         }
+
         public void RemoveAllOrderFood()
         {
             OrderFoods.Clear();
@@ -118,6 +113,14 @@ namespace ShakeShack_Kiosk.ViewModel
         {
             this.OrderFoods = new ObservableCollection<OrderFood>();
             this.OrderFoodTotalPrice = 0;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(string name) {
+            if (PropertyChanged != null) {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ShakeShack_Kiosk.Database.Dao
 {
-    class OrderHistoryDao
+    class OrderHistoryDao : IOrderHistoryDao
     {
         public void CreateOrderHistory(int orderId, OrderHistory orderHistory)
         {
@@ -27,6 +27,7 @@ namespace ShakeShack_Kiosk.Database.Dao
             connection.SetCommand(OrderHistorySQLMapper.GetLastOrderIdSQL);
             MySqlDataReader reader =  connection.ExecuteQuery();
 
+            // 값이 있고 order_id가 null이 아닐경우
             if (reader.Read() && reader["order_id"] != System.DBNull.Value)
             {
                 return Convert.ToInt32(reader["order_id"]);
@@ -43,26 +44,10 @@ namespace ShakeShack_Kiosk.Database.Dao
             MySqlDataReader reader = connection.ExecuteQuery();
 
             List<OrderHistory> orderHistories = new List<OrderHistory>();
+
             while (reader.Read())
             {
-                OrderHistory orderHistory = new OrderHistory()
-                {
-                    OrderId = Convert.ToInt32(reader["order_id"]),
-                    UserId = (string)reader["user_id"],
-                    FoodId = Convert.ToInt32(reader["food_id"]),
-                    Count = Convert.ToInt32(reader["count"]),
-                    PaymentMethod = Convert.ToInt32(reader["payment_method"]),
-                    CreatedAt = Convert.ToDateTime(reader["created_at"]),
-                    Price = Convert.ToInt32(reader["price"])
-                };
-                if (reader["table_number"] == DBNull.Value)
-                {
-                    orderHistory.TableNumber = null;
-                } else
-                {
-                    orderHistory.TableNumber = Convert.ToInt32(reader["table_number"]);
-                }
-
+                OrderHistory orderHistory = OrderHistory.Map(reader);
                 orderHistories.Add(orderHistory);
             }
 
@@ -70,7 +55,7 @@ namespace ShakeShack_Kiosk.Database.Dao
             return orderHistories;
          }
 
-        public List<OrderHistory> GetOrderHistoryByDate(DateTime date)
+        public List<OrderHistory> GetOrderHistoriesByDate(DateTime date)
         {
             DBConnection connection = new DBConnection();
             connection.Connect();
@@ -80,24 +65,7 @@ namespace ShakeShack_Kiosk.Database.Dao
             List<OrderHistory> orderHistories = new List<OrderHistory>();
             while (reader.Read())
             {
-                OrderHistory orderHistory = new OrderHistory()
-                {
-                    OrderId = Convert.ToInt32(reader["order_id"]),
-                    UserId = (string)reader["user_id"],
-                    FoodId = Convert.ToInt32(reader["food_id"]),
-                    Count = Convert.ToInt32(reader["count"]),
-                    PaymentMethod = Convert.ToInt32(reader["payment_method"]),
-                    CreatedAt = Convert.ToDateTime(reader["created_at"]),
-                    Price = Convert.ToInt32(reader["price"])
-                };
-                if (reader["table_number"] == DBNull.Value)
-                {
-                    orderHistory.TableNumber = null;
-                } else
-                {
-                    orderHistory.TableNumber = Convert.ToInt32(reader["table_number"]);
-                }
-
+                OrderHistory orderHistory = OrderHistory.Map(reader);
                 orderHistories.Add(orderHistory);
             }
 

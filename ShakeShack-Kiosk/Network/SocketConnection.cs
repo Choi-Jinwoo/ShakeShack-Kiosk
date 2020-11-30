@@ -18,6 +18,8 @@ namespace ShakeShack_Kiosk.Network
 {
     static class Constants
     {
+        public const string SERVER_IP = "10.80.162.152";
+        public const int PORT = 80;
         public const int BUFFER_SIZE = 1024;
     }
     public class SocketConnection : INotifyPropertyChanged
@@ -25,9 +27,19 @@ namespace ShakeShack_Kiosk.Network
         private static SocketConnection instance;
         public TcpClient Client { get; private set; }
         private Thread receiveThread { get; set; }
-
-        private bool isConnected;
+        private bool isConnected { get; set; }
         private bool isSendResult { get; set; } = false;
+        private DateTime lastConnectedDt { get; set; }
+        public DateTime LastConnectedDt
+        {
+            get => lastConnectedDt;
+            set
+            {
+                lastConnectedDt = value;
+                OnPropertyChanged("LastConnectedDt");
+            }
+        }
+
         public bool IsConnected
         {
             get => isConnected;
@@ -54,7 +66,7 @@ namespace ShakeShack_Kiosk.Network
 
         public void Connect()
         {
-            IPEndPoint ep = new IPEndPoint(IPAddress.Parse("10.80.162.152"), 80);
+            IPEndPoint ep = new IPEndPoint(IPAddress.Parse(Constants.SERVER_IP), Constants.PORT);
             Client = new TcpClient();
 
             try
@@ -72,6 +84,7 @@ namespace ShakeShack_Kiosk.Network
 
                 receiveThread = new Thread(new ThreadStart(ReceiveMessage));
                 receiveThread.Start();
+                LastConnectedDt = DateTime.Now;
             } catch (Exception e)
             {
                 IsConnected = false;
@@ -117,6 +130,7 @@ namespace ShakeShack_Kiosk.Network
                     {
                         IsConnected = false;
                         receiveThread.Abort();
+                        LastConnectedDt = DateTime.Now;
                         break;
                     }
 
@@ -128,14 +142,14 @@ namespace ShakeShack_Kiosk.Network
                         continue;
                     }
 
-                    if (response.Contains("총매출"))
+                    if (response.Contains("총매출액"))
                     {
                         MsgPacket msgPacket = new MsgPacket()
                         {
                             MSGType = 1,
                             Group = true,
                             Id = "2119",
-                            Content = OrderHistoryViewModel.Instance.TotalSales.ToString(),
+                            Content = $"총 매출액 : {OrderHistoryViewModel.Instance.TotalSales.ToString()}"
                         };
                         SendMessage(msgPacket);
                         continue;

@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 
 namespace ShakeShack_Kiosk.ViewModel
 {
+    static class Constants
+    {
+        public const int END_HOUR = 24;
+    }
     class OrderHistoryViewModel : INotifyPropertyChanged
     {
         private static OrderHistoryViewModel instance;
@@ -17,13 +21,6 @@ namespace ShakeShack_Kiosk.ViewModel
         private OrderHistoryViewModel()
         {
             LoadOrderHistory();
-        }
-
-        public void LoadOrderHistory()
-        {
-            originOrderHistories = orderHistoryDao.GetOrderHistories();
-            orderHistories = originOrderHistories;
-            CalcSales();
         }
 
         public static OrderHistoryViewModel Instance 
@@ -38,9 +35,9 @@ namespace ShakeShack_Kiosk.ViewModel
             }
         }
 
-        OrderHistoryDao orderHistoryDao = new OrderHistoryDao();
-        FoodDao foodDao = new FoodDao();
-        CategoryDao categoryDao = new CategoryDao();
+        private OrderHistoryDao orderHistoryDao = new OrderHistoryDao();
+        private FoodDao foodDao = new FoodDao();
+        private CategoryDao categoryDao = new CategoryDao();
 
         private List<OrderHistory> orderHistories = new List<OrderHistory>();
         private List<OrderHistory> originOrderHistories = new List<OrderHistory>();
@@ -78,6 +75,13 @@ namespace ShakeShack_Kiosk.ViewModel
             }
         }
 
+        public void LoadOrderHistory()
+        {
+            originOrderHistories = orderHistoryDao.GetOrderHistories();
+            orderHistories = originOrderHistories;
+            CalcSales();
+        }
+
         public void SetAllPayemntSales()
         {
             orderHistories = originOrderHistories;
@@ -104,6 +108,7 @@ namespace ShakeShack_Kiosk.ViewModel
         {
             int totalSales = 0;
             int totalSalesExcludeDiscount= 0;
+
             foreach (OrderHistory orderHistory in orderHistories)
             {
                 Food food = foodDao.GetFood(orderHistory.FoodId);
@@ -111,35 +116,9 @@ namespace ShakeShack_Kiosk.ViewModel
                 totalSalesExcludeDiscount += orderHistory.Count * orderHistory.Price;
             }
 
-            this.TotalSales = totalSales;
-            this.TotalSalesExcludeDiscount = totalSalesExcludeDiscount;
-            this.DiscountPrice = totalSales - totalSalesExcludeDiscount;
-        }
-
-        public List<ChartItem> GetFoodChartItems()
-        {
-            List<OrderHistory> orderHistories = orderHistoryDao.GetOrderHistories();
-            return GetFoodChartItemsInList(orderHistories);
-        }
-
-        public List<OrderHistory> GetOrderHistoriesByUser(string id)
-        {
-            List<OrderHistory> orderHistories = orderHistoryDao.GetOrderHistories();
-            return orderHistories.Where(x => x.UserId == id).ToList();
-        }
-
-        public List<ChartItem> GetFoodChartItemsByUser(string id)
-        {
-            List<OrderHistory> orderHistories = GetOrderHistoriesByUser(id);
-            return GetFoodChartItemsInList(orderHistories); 
-        }
-
-        public List<ChartItem> GetFoodChartItemByTable(int tableNubmer)
-        {
-            List<OrderHistory> orderHistories = orderHistoryDao.GetOrderHistories()
-                .Where(x => x.TableNumber == tableNubmer)
-                .ToList();
-            return GetFoodChartItemsInList(orderHistories);
+            TotalSales = totalSales;
+            TotalSalesExcludeDiscount = totalSalesExcludeDiscount;
+            DiscountPrice = totalSales - totalSalesExcludeDiscount;
         }
 
         private List<ChartItem> GetFoodChartItemsInList(List<OrderHistory> orderHistories)
@@ -220,6 +199,33 @@ namespace ShakeShack_Kiosk.ViewModel
             return categoryChartItems;
         }
 
+        public List<ChartItem> GetFoodChartItems()
+        {
+            List<OrderHistory> orderHistories = orderHistoryDao.GetOrderHistories();
+            return GetFoodChartItemsInList(orderHistories);
+        }
+
+        public List<OrderHistory> GetOrderHistoriesByUser(string id)
+        {
+            List<OrderHistory> orderHistories = orderHistoryDao.GetOrderHistories();
+            return orderHistories.Where(x => x.UserId == id).ToList();
+        }
+
+        public List<ChartItem> GetFoodChartItemsByUser(string id)
+        {
+            List<OrderHistory> orderHistories = GetOrderHistoriesByUser(id);
+            return GetFoodChartItemsInList(orderHistories); 
+        }
+
+        public List<ChartItem> GetFoodChartItemByTable(int tableNubmer)
+        {
+            List<OrderHistory> orderHistories = orderHistoryDao.GetOrderHistories()
+                .Where(x => x.TableNumber == tableNubmer)
+                .ToList();
+            return GetFoodChartItemsInList(orderHistories);
+        }
+
+
         public List<ChartItem> GetCategoryChartItems()
         {
             List<OrderHistory> orderHistories = orderHistoryDao.GetOrderHistories();
@@ -236,7 +242,7 @@ namespace ShakeShack_Kiosk.ViewModel
 
         public int GetTodayTotalSales()
         {
-            List<OrderHistory> orderHistories = orderHistoryDao.GetOrderHistoryByDate(DateTime.Now);
+            List<OrderHistory> orderHistories = orderHistoryDao.GetOrderHistoriesByDate(DateTime.Now);
             int totalSales = 0;
 
             foreach (OrderHistory orderHistory in orderHistories)
@@ -250,7 +256,7 @@ namespace ShakeShack_Kiosk.ViewModel
         public List<SalesByTime> GetChartItemsByTime()
         {
             List<SalesByTime> salesByTimes = new List<SalesByTime>();
-            for (int i = 0; i < 24; i += 1)
+            for (int i = 0; i < Constants.END_HOUR; i += 1)
             {
                 salesByTimes.Add(
                     new SalesByTime()
@@ -260,7 +266,7 @@ namespace ShakeShack_Kiosk.ViewModel
                     });
             }
 
-            List<OrderHistory> orderHistories = orderHistoryDao.GetOrderHistories();
+            List<OrderHistory> orderHistories = orderHistoryDao.GetOrderHistoriesByDate(DateTime.Now);
             foreach (OrderHistory orderHistory in orderHistories)
             {
                 int totalPrice = orderHistory.Count * orderHistory.Price;
@@ -279,6 +285,5 @@ namespace ShakeShack_Kiosk.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
-
     }
 }

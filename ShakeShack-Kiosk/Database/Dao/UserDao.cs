@@ -25,15 +25,12 @@ namespace ShakeShack_Kiosk.Database.Dao
                 return null;
             }
 
-            User user = new User()
-            {
-                Id = (string)reader["id"],
-                Name = (string)reader["name"],
-            };
+            User user = User.Map(reader);
 
             connection.CloseConnection();
             return user;
         }
+
         public List<User> GetUsers()
         {
             DBConnection connection = new DBConnection();
@@ -45,11 +42,7 @@ namespace ShakeShack_Kiosk.Database.Dao
             List<User> users = new List<User>();
             while (reader.Read())
             {
-                User user = new User()
-                {
-                    Id = (string)reader["id"],
-                    Name = (string)reader["name"],
-                };
+                User user = User.Map(reader);
                 users.Add(user);
             }
 

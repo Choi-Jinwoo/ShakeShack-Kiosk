@@ -13,10 +13,11 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="8*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Image Grid.Column="0"
                Source="/Assets/logo.png"
@@ -47,9 +48,14 @@
                        MouseDown="TextBlock_MouseDown"/>
         </Grid>
 
+        <Grid Grid.Column="3">
+            <TextBlock x:Name="tbLastConnected"
+                       Text="{Binding LastConnectedDt, StringFormat=최근 연결 시간 : {0}}"/>
+        </Grid>
+
         <Image x:Name="imgHome"
                Source="/Assets/home-icon.png"
-               Grid.Column="3"
+               Grid.Column="4"
                Width="20"
                MouseDown="imgHome_MouseDown" />
 

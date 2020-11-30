@@ -21,14 +21,10 @@ namespace ShakeShack_Kiosk.Database.Dao
             MySqlDataReader reader = connection.ExecuteQuery();
 
             List<Category> categories = new List<Category>();
+
             while (reader.Read())
             {
-                Category category = new Category()
-                {
-                    Id = Convert.ToInt32(reader["id"]),
-                    Name = Convert.ToString(reader["name"])
-                };
-
+                Category category = Category.Map(reader);
                 categories.Add(category);
             }
 

@@ -23,17 +23,7 @@ namespace ShakeShack_Kiosk.Database.Dao
 
             if (reader.Read())
             {
-                Food food = new Food()
-                {
-                    Id = Convert.ToInt32(reader["id"]),
-                    CategoryId = Convert.ToInt32(reader["category_id"]),
-                    Name = Convert.ToString(reader["name"]),
-                    ImagePath = Convert.ToString(reader["image_path"]),
-                    Price = Convert.ToInt32(reader["price"]),
-                    DiscountedPrice = Convert.ToInt32(reader["discounted_price"]),
-                    IsSoldOut = Convert.ToBoolean(reader["is_sold_out"]),
-                };
-
+                Food food = Food.Map(reader);
                 connection.CloseConnection();
 
                 return food;
@@ -56,20 +46,9 @@ namespace ShakeShack_Kiosk.Database.Dao
             List<Food> foods = new List<Food>();
             while (reader.Read())
             {
-                Food food = new Food()
-                {
-                    Id = Convert.ToInt32(reader["id"]),
-                    CategoryId = Convert.ToInt32(reader["category_id"]),
-                    Name = Convert.ToString(reader["name"]),
-                    ImagePath = Convert.ToString(reader["image_path"]),
-                    Price = Convert.ToInt32(reader["price"]),
-                    DiscountedPrice = Convert.ToInt32(reader["discounted_price"]),
-                    IsSoldOut = Convert.ToBoolean(reader["is_sold_out"]),
-                };
-
+                Food food = Food.Map(reader);
                 foods.Add(food);
             }
-
             connection.CloseConnection();
 
             return foods;

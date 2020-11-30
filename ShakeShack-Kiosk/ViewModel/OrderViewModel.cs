@@ -30,6 +30,7 @@ namespace ShakeShack_Kiosk.ViewModel
         }
 
         public List<Food> GetSelectedCategoryFoods() => Foods.Where(x => x.CategoryId == SelectedCategory.Id).ToList();
+
         public List<Food> GetSelectedCategoryFoods(int takeCount) {
             List<Food> foods = Foods
                 .Where(x => x.CategoryId == SelectedCategory.Id)
@@ -38,9 +39,9 @@ namespace ShakeShack_Kiosk.ViewModel
             return foods;
         }
         public List<Food> GetSelectedCategoryFoods(int skipCount, int takeCount) => Foods
-                                .Where(x => x.CategoryId == SelectedCategory.Id)
-                                .Skip(skipCount)
-                                .Take(takeCount)
-                                .ToList();
+            .Where(x => x.CategoryId == SelectedCategory.Id)
+            .Skip(skipCount)
+            .Take(takeCount)
+            .ToList();
     }
 }

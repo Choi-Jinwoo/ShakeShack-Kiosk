@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySqlConnector;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,13 @@ namespace ShakeShack_Kiosk.Model
         public string Id { get; set; }
         public string Name { get; set; }
         public int TotalSales { get; set; }
+        public static User Map(MySqlDataReader reader)
+        {
+            return new User
+            {
+                Id = (string)reader["id"],
+                Name = (string)reader["name"],
+            };
+        }
     }
 }

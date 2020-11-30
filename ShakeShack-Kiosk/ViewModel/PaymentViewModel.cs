@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Diagnostics;
 
 namespace ShakeShack_Kiosk.ViewModel
 {
@@ -67,7 +68,6 @@ namespace ShakeShack_Kiosk.ViewModel
             Pay(PaymentMethodEnum.CASH);
         }
 
-        // TODO: 매개변수 삭제
         public void PayByCard()
         {
             Pay(PaymentMethodEnum.CARD);
@@ -77,7 +77,7 @@ namespace ShakeShack_Kiosk.ViewModel
         {
 
             int orderId = orderHistoryDao.GetLastOrderId() + 1;
-            this.OrderId = orderId;
+            OrderId = orderId;
 
             List<MsgPacketMenu> menus = new List<MsgPacketMenu>();
 
@@ -125,7 +125,9 @@ namespace ShakeShack_Kiosk.ViewModel
 
                     socketCon.SendMessage(packet);
                 } catch (Exception e)
-                { }
+                {
+                    Debug.WriteLine(e);
+                }
             });
 
             orderTask.Start();
